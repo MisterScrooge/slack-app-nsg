@@ -1,5 +1,5 @@
 import { useState } from "react";
-import "./Login.css"
+import "./Login-Reg.css"
 
 const Login = () => {
     const [userInput, setUserInput] = useState({email: '', password: ''});
@@ -7,13 +7,14 @@ const Login = () => {
     return (
         <div className="form-con">
             <h3>Log in</h3>
-            <span className="sub-info">Welcome Back! Please enter your details</span>
+            <p className="sub-info">Welcome Back! Please enter your details</p>
 
             <form className="login-reg-form">
                 <div className="form-inner-con">
                     <label>Email</label>
                     <input
                         type="text"
+                        placeholder="Enter your email"
                         value={userInput.email}
                         onInput={e => setUserInput({email: e.target.value, password: userInput.password})}
                     />
@@ -22,18 +23,19 @@ const Login = () => {
                 <div className="form-inner-con">
                     <label>Password</label>
                     <input
-                        type="text"
+                        type="password"
+                        placeholder="••••••"
                         value={userInput.password}
                         onInput={e => setUserInput({email: userInput.email, password: e.target.value})}
                     />
                 </div>
 
                 <div className="form-inner-con">
-                    <button type="Submit">Sign in</button>
+                    <button type="Submit" className="form-btn">Sign in</button>
                 </div>
             </form>
 
-            <span className="sub-info">Don't have an account? Sign up</span>
+            <p className="sub-info">Don't have an account? Sign up</p>
         </div>
     )
 }
