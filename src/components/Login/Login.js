@@ -1,10 +1,50 @@
-import { useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { LoginHeaders, LoginInfo } from "../../contexts/LoginContext";
 import "./Login-Reg.css"
 
 const Login = () => {
     const [userInput, setUserInput] = useState({email: '', password: ''});
+    const url = "http://206.189.91.54/api/v1";
+    const [loginInfo, updateLoginInfo] = useContext(LoginInfo);
+    const [loginHeaders, updateLoginHeaders] = useContext(LoginHeaders);
     const navigate = useNavigate();
+
+    const signUp = async () => {
+        updateLoginInfo(userInput);
+
+        const response = await fetch(`${url}/auth/sign_in`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(userInput)
+        });
+
+        const data = await response.json();
+        console.log("data", data);
+
+        let tempHeaders = {};
+        for (let [key, value] of response.headers) {
+            console.log(`${key} = ${value}`);
+            tempHeaders[key] = value;
+        }
+        updateLoginHeaders(tempHeaders);
+
+        if(response.status === 200) {
+            navigate("/homepage");
+        }
+    }
+
+    const submitHandler = (e) => {
+        e.preventDefault();
+        signUp()
+    }
+
+    useEffect(() => {
+        console.log("loginInfo", loginInfo);
+        console.log("loginHeaders", loginHeaders);
+    });
 
     return (
         <div className="login-reg-con">
@@ -12,14 +52,14 @@ const Login = () => {
                 <h3>Log in</h3>
                 <p className="sub-info">Welcome Back! Please enter your details</p>
 
-                <form className="login-reg-form">
+                <form className="login-reg-form" onSubmit={submitHandler}>
                     <div className="form-inner-con">
                         <label>Email</label>
                         <input
                             type="text"
                             placeholder="Enter your email"
                             value={userInput.email}
-                            onInput={e => setUserInput({email: e.target.value, password: userInput.password})}
+                            onInput={e => setUserInput({...userInput, email: e.target.value})}
                         />
                     </div>
 
@@ -29,7 +69,7 @@ const Login = () => {
                             type="password"
                             placeholder="••••••"
                             value={userInput.password}
-                            onInput={e => setUserInput({email: userInput.email, password: e.target.value})}
+                            onInput={e => setUserInput({...userInput, password: e.target.value})}
                         />
                     </div>
 

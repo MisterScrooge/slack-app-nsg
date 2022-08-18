@@ -19,7 +19,7 @@ const UserReg = () => {
                             type="text"
                             placeholder="Enter your email"
                             value={userInput.email}
-                            onInput={e => setUserInput({email: e.target.value, password: userInput.password})}
+                            onInput={e => setUserInput({...userInput, email: e.target.value})}
                         />
                     </div>
 
@@ -29,7 +29,7 @@ const UserReg = () => {
                             type="password"
                             placeholder="••••••"
                             value={userInput.password}
-                            onInput={e => setUserInput({email: userInput.email, password: e.target.value, password_confirmation: userInput.password_confirmation})}
+                            onInput={e => setUserInput({...userInput, password: e.target.value})}
                         />
                     </div>
 
@@ -39,7 +39,7 @@ const UserReg = () => {
                             type="password"
                             placeholder="••••••"
                             value={userInput.password_confirmation}
-                            onInput={e => setUserInput({email: userInput.email, password: userInput.password, password_confirmation: e.target.value})}
+                            onInput={e => setUserInput({...userInput, password_confirmation: e.target.value})}
                         />
                     </div>
 
