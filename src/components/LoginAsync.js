@@ -1,14 +1,13 @@
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
 
-const LoginAsync = () => {
+const LoginAsync = (props) => {
     const url = "http://206.189.91.54/api/v1";
+    
     const [userInfo, setUserInfo] = useState({
         email: '',
         password: '',
     })
-    const [loginHeaders, setLoginHeaders] = useState({
-        expiry: '',
-    })
+    
 
     const signUp = async () => {
         console.log('userInfo', userInfo);
@@ -22,18 +21,24 @@ const LoginAsync = () => {
         const data = await response.json();
         console.log(data);
 
+        // let tempHeaders = {};
         for (let [key, value] of response.headers) {
+            // let newKey = `${key}`
             console.log(`${key} = ${value}`);
+            // tempHeaders[newKey] = value;
+            props.setLoginHeaders({...props.loginHeaders, key: value})
         }
-        setLoginHeaders({...response.headers});
-
+        // props.setLoginHeaders({...tempHeaders});
+        // console.log(tempHeaders);
+        console.log(props.loginHeaders);
     }
+
+    // useEffect(() => {console.log(props.loginHeaders)}, [props.loginHeaders])
 
     const submitHandler = (e) => {
         e.preventDefault();
         signUp(userInfo)
     }
-    useEffect(() => {console.log("loginHeaders,", loginHeaders)}, [loginHeaders])
 
     return (
         <div>
