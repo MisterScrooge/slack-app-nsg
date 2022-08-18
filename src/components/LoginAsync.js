@@ -21,19 +21,19 @@ const LoginAsync = (props) => {
         const data = await response.json();
         console.log(data);
 
-        // let tempHeaders = {};
+        let tempHeaders = {};
         for (let [key, value] of response.headers) {
-            // let newKey = `${key}`
+            let newKey = `${key}`
             console.log(`${key} = ${value}`);
-            // tempHeaders[newKey] = value;
-            props.setLoginHeaders({...props.loginHeaders, key: value})
+            tempHeaders[newKey] = value;
+            // props.setLoginHeaders({...props.loginHeaders, key: value})
         }
-        // props.setLoginHeaders({...tempHeaders});
-        // console.log(tempHeaders);
+        props.setLoginHeaders({...tempHeaders});
+        console.log(tempHeaders);
         console.log(props.loginHeaders);
     }
 
-    // useEffect(() => {console.log(props.loginHeaders)}, [props.loginHeaders])
+    useEffect(() => {console.log(props.loginHeaders)}, [props.loginHeaders])
 
     const submitHandler = (e) => {
         e.preventDefault();
