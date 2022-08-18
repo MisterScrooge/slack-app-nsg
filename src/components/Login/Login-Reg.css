@@ -76,3 +76,10 @@
 .sub-info span:active {
     color: #5C62C4;
 }
+
+.invalid {
+    text-align: center;
+    font-size: 0.9em;;
+    font-style: italic;
+    color: rgb(255, 0, 0);
+}
