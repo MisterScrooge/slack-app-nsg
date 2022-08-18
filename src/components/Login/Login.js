@@ -1,9 +1,10 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import "./Login-Reg.css"
 
 const Login = () => {
     const [userInput, setUserInput] = useState({email: '', password: ''});
+    const navigate = useNavigate();
 
     return (
         <div className="login-reg-con">
@@ -37,7 +38,7 @@ const Login = () => {
                     </div>
                 </form>
 
-                <p className="sub-info">Don't have an account? <Link to="/userreg">Sign up</Link></p>
+                <p className="sub-info">Don't have an account? <span onClick={() => navigate("/userreg")}>Sign up</span></p>
             </div>
         </div>
     )

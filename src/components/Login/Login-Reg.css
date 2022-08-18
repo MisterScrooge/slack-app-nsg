@@ -63,12 +63,16 @@
     text-align: center;
 }
 
-.sub-info a {
+.sub-info span {
     color: #0C0E99;
     font-weight: 500;
     text-decoration: none;
 }
 
-.sub-info a:active {
+.sub-info span:hover {
+    cursor: pointer;
+}
+
+.sub-info span:active {
     color: #5C62C4;
 }
