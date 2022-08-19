@@ -7,8 +7,8 @@ const Login = () => {
     const [userInput, setUserInput] = useState({email: '', password: ''});
     const [invalid, setInvalid] = useState(false);
     const url = "http://206.189.91.54/api/v1";
-    const [loginInfo, updateLoginInfo] = useContext(LoginInfo);
-    const [loginHeaders, updateLoginHeaders] = useContext(LoginHeaders);
+    const {loginInfo, updateLoginInfo} = useContext(LoginInfo);
+    const {loginHeaders, updateLoginHeaders} = useContext(LoginHeaders);
     const navigate = useNavigate();
 
     const signUp = async () => {

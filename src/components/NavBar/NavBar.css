@@ -6,12 +6,16 @@
     color: #5a5c65;
     font-size: 1.2em;
     font-weight: 600;
-    padding: 0 1rem;
+    padding: 0 1rem 0.5rem;
 }
 
 .nav-item {
     color: #f3f5f7;
     font-size: 1em;
     font-weight: 400;
-    padding: 0 1rem;
+    padding: 0.2rem 1rem;
+}
+
+.nav-item:hover {
+    cursor: pointer;
 }
