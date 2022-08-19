@@ -27,7 +27,7 @@ const MainChat = () => {
                 />
 
                 <div className="send-btn">
-                    <i class="fa-solid fa-paper-plane"></i>
+                    <i className="fa-solid fa-paper-plane"></i>
                     Send
                 </div>
             </div>
