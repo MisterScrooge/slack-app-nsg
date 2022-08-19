@@ -9,8 +9,18 @@
 
 .nav {
     grid-area: nav;
+    padding: 0.5rem 0;
+    background: #1a1924;
+    border-right:  1px solid #24252e;
 }
 
 .main {
     grid-area: main;
+}
+
+.header {
+    color: #f3f5f7;
+    padding: 0 1rem;
+    font-size: 2em;
+    font-weight: 600;
 }

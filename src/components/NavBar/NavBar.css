@@ -1,3 +1,17 @@
-.nav {
-    background: #1a1924;
+.nav-list {
+    margin: 2rem 0;
+}
+
+.nav-header {
+    color: #5a5c65;
+    font-size: 1.2em;
+    font-weight: 600;
+    padding: 0 1rem;
+}
+
+.nav-item {
+    color: #f3f5f7;
+    font-size: 1em;
+    font-weight: 400;
+    padding: 0 1rem;
 }
