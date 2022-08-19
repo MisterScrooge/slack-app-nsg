@@ -24,6 +24,10 @@
     cursor: pointer;
 }
 
+.nav-item.selected {
+    background: #3f3f5d;
+}
+
 .initial {
     background: #2a2528;
     border-radius: 50%;

@@ -1,9 +1,11 @@
 import { useContext, useEffect } from "react";
 import { ChannelsContext } from "../../contexts/ChannelsContext";
 import { LoginHeaders } from "../../contexts/LoginContext";
+import { SelectedContext } from "../../contexts/SelectedContext";
 import "./NavBar.css"
 
 const NavBar = () => {
+    const {selected, updateSelected} = useContext(SelectedContext);
     const {channels, updateChannels} = useContext(ChannelsContext);
     const {loginHeaders} = useContext(LoginHeaders);
     const url = "http://206.189.91.54/api/v1";
@@ -21,14 +23,13 @@ const NavBar = () => {
 
         if(response.status === 200) {
             const data = await response.json();
-            console.log(data['data']);
             updateChannels(data['data']);
         }
     }
 
     useEffect(() => {
         retrieveChannels();
-    });
+    }, [retrieveChannels]);
 
     return(
         <div className="nav">
@@ -38,7 +39,10 @@ const NavBar = () => {
                 <h5 className="nav-header">Channels</h5>
                 {channels.length > 0 && channels.map((channel, i) => {
                     return (
-                        <div key={channel.id} className="nav-item">
+                        <div key={"channel" + channel.id}
+                            className={selected.id === channel.id ? "nav-item selected" : "nav-item"}
+                            onClick={() => updateSelected(channels[i])}
+                        >
                             <div className="initial">{channel.name[0]}</div>
                             {channel.name}
                         </div>
