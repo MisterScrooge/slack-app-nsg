@@ -34,7 +34,7 @@ const UserReg = () => {
                     </div>
 
                     <div className="form-inner-con">
-                        <label>Password</label>
+                        <label>Confirm Your Password</label>
                         <input
                             type="password"
                             placeholder="••••••"
