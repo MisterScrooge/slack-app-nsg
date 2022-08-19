@@ -29,7 +29,7 @@ const NavBar = () => {
 
     useEffect(() => {
         retrieveChannels();
-    }, [retrieveChannels]);
+    });
 
     return(
         <div className="nav">
