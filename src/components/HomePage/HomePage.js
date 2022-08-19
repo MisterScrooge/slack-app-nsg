@@ -1,11 +1,14 @@
+import { SelectedProvider } from "../../contexts/SelectedContext";
 import NavBar from "../NavBar/NavBar";
 import "./HomePage.css";
 
 const HomePage = () => {
     return(
-        <div className="homepage">
-            <NavBar />
-        </div>
+        <SelectedProvider>
+            <div className="homepage">
+                <NavBar />
+            </div>
+        </SelectedProvider>
     )
 }
 

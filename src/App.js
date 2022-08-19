@@ -11,13 +11,11 @@ function App() {
   return (
     <LoginProvider>
       <ChannelsProvider>
-        <SelectedProvider>
-          <Routes>
-            <Route path="/" element={<Login />} />
-            <Route path="/userreg" element={<UserReg />}/>
-            <Route path="/homepage" element={<HomePage />}/>
-          </Routes>
-        </SelectedProvider>
+        <Routes>
+          <Route path="/" element={<Login />} />
+          <Route path="/userreg" element={<UserReg />}/>
+          <Route path="/homepage" element={<HomePage />}/>
+        </Routes>
       </ChannelsProvider>
     </LoginProvider>
   );
