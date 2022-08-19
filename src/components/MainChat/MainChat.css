@@ -26,14 +26,14 @@
     color: white;
     font-size: 1em;
     flex: auto;
-    padding: 1rem;
+    padding: 0.8rem 1rem;
 }
 
 .send-btn {
     background: #5d61ed;
     border-radius: 5px;
     color: white;
-    padding: 1rem;
+    padding: 0.8rem 1.5rem;
     display: flex;
     justify-content: center;
     align-items: center;
