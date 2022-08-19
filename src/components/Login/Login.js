@@ -22,18 +22,20 @@ const Login = () => {
             body: JSON.stringify(userInput)
         });
 
-        const data = await response.json();
-        console.log("data", data);
-
-        let tempHeaders = {};
-        for (let [key, value] of response.headers) {
-            console.log(`${key} = ${value}`);
-            tempHeaders[key] = value;
-        }
-        updateLoginHeaders(tempHeaders);
-
         if(response.status === 200) {
             setInvalid(false);
+
+            updateLoginHeaders({
+                "access-token": response.headers.get("access-token"),
+                "client": response.headers.get("client"),
+                "expiry": response.headers.get("expiry"),
+                "uid": response.headers.get("uid")
+            });
+
+            const data = await response.json();
+            // console.log("data", data);
+            updateLoginInfo(data);
+
             navigate("/homepage");
         } else {
             setInvalid(true);
