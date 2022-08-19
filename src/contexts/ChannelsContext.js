@@ -10,8 +10,8 @@ export const ChannelsProvider = ({children}) => {
     }
 
     return (
-        <Channels.Provider value={{channels, updateChannels}}>
+        <ChannelsContext.Provider value={{channels, updateChannels}}>
             {children}
-        </Channels.Provider>
+        </ChannelsContext.Provider>
     )
 }
