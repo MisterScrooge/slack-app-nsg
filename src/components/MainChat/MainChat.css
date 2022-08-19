@@ -1,5 +1,47 @@
-.chat-header {
+.main {
+    display: flex;
+    flex-direction: column;
+}
+
+.header.chat-header {
     padding-top: 1rem;
     padding-bottom: 1rem;
     border-bottom: 2px solid #3f4151;
+}
+
+.messages-div {
+    flex: auto;
+}
+
+.send-div {
+    display: flex;
+    padding: 1rem;
+    gap: 1rem;
+}
+
+.send-div input {
+    background: #37393e;
+    border: 2px solid #3f4151;
+    border-radius: 5px;
+    color: white;
+    font-size: 1em;
+    flex: auto;
+    padding: 1rem;
+}
+
+.send-btn {
+    background: #5d61ed;
+    border-radius: 5px;
+    color: white;
+    padding: 1rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0.5rem;
+    user-select: none;
+}
+
+.send-btn:hover {
+    cursor: pointer;
+    background: #6e72ee;
 }
