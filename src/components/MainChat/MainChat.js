@@ -1,9 +1,14 @@
-import { useContext } from "react";
+import { useContext, useEffect, useState } from "react";
 import { SelectedContext } from "../../contexts/SelectedContext";
 import "./MainChat.css";
 
 const MainChat = () => {
     const {selected} = useContext(SelectedContext);
+    const [message, setMessage] = useState("");
+
+    useEffect(() => {
+        setMessage("");
+    }, [selected]);
 
     return(
         <div className="main">
@@ -16,7 +21,9 @@ const MainChat = () => {
             <div className="send-div">
                 <input
                     type="text"
+                    value={message}
                     placeholder={"Message " + selected.name}
+                    onInput={e => setMessage(e.target.value)}
                 />
 
                 <div className="send-btn">
