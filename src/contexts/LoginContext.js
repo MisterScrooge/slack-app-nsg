@@ -16,8 +16,8 @@ export const LoginProvider = ({children}) => {
     }
 
     return (
-        <LoginInfo.Provider value={[loginInfo, updateLoginInfo]}>
-            <LoginHeaders.Provider value={[loginHeaders, updateLoginHeaders]}>
+        <LoginInfo.Provider value={{loginInfo, updateLoginInfo}}>
+            <LoginHeaders.Provider value={{loginHeaders, updateLoginHeaders}}>
                 {children}
             </LoginHeaders.Provider>
         </LoginInfo.Provider>

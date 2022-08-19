@@ -1,6 +1,6 @@
 import { createContext, useState } from "react";
 
-export const Channels = createContext();
+export const ChannelsContext = createContext();
 
 export const ChannelsProvider = ({children}) => {
     const [channels, setChannels] = useState([]);
@@ -10,7 +10,7 @@ export const ChannelsProvider = ({children}) => {
     }
 
     return (
-        <Channels.Provider value={[channels, updateChannels]}>
+        <Channels.Provider value={{channels, updateChannels}}>
             {children}
         </Channels.Provider>
     )
