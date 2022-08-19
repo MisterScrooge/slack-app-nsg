@@ -39,6 +39,7 @@ const NavBar = () => {
                 {channels.length > 0 && channels.map((channel, i) => {
                     return (
                         <div key={channel.id} className="nav-item">
+                            <div className="initial">{channel.name[0]}</div>
                             {channel.name}
                         </div>
                     )

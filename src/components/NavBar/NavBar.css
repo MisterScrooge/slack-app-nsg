@@ -13,9 +13,25 @@
     color: #f3f5f7;
     font-size: 1em;
     font-weight: 400;
-    padding: 0.2rem 1rem;
+    padding: 0.5rem 1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
 }
 
 .nav-item:hover {
+    background: #2b2c32;
     cursor: pointer;
+}
+
+.initial {
+    background: #2a2528;
+    border-radius: 50%;
+    border: 2px solid #393735;
+    color: #c19e6b;
+    width: 2rem;
+    height: 2rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
