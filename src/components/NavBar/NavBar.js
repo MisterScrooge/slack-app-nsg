@@ -1,35 +1,17 @@
 import { useContext, useEffect } from "react";
 import { ChannelsContext } from "../../contexts/ChannelsContext";
-import { LoginHeaders } from "../../contexts/LoginContext";
 import { SelectedContext } from "../../contexts/SelectedContext";
 import "./NavBar.css"
 
 const NavBar = () => {
     const {selected, updateSelected} = useContext(SelectedContext);
-    const {channels, updateChannels} = useContext(ChannelsContext);
-    const {loginHeaders} = useContext(LoginHeaders);
-    const url = "http://206.189.91.54/api/v1";
-
-    const retrieveChannels = async () => {
-        const response = await fetch(`${url}/channels`, {
-            method: 'GET',
-            headers: {
-                'expiry': loginHeaders['expiry'],
-                'uid': loginHeaders['uid'],
-                'access-token': loginHeaders['access-token'],
-                'client': loginHeaders['client']
-            }
-        });
-
-        if(response.status === 200) {
-            const data = await response.json();
-            updateChannels(data['data']);
-        }
-    }
+    const {channels} = useContext(ChannelsContext);
 
     useEffect(() => {
-        retrieveChannels();
-    });
+        if(selected === {} && channels.length > 0) {
+            updateSelected(channels[0]);
+        }
+    }, [channels]);
 
     return(
         <div className="nav">
