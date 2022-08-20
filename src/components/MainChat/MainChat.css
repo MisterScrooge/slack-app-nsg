@@ -11,7 +11,51 @@
 
 .messages-div {
     flex: auto;
+    display: flex;
+    flex-direction: column;
 }
+
+.message-div {
+    margin: 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.2rem;
+    overflow-y: auto;
+}
+
+.message-body {
+    background: #292a2f;
+    border: 2px solid #3f4151;
+    border-radius: 5px;
+    color: white;
+    font-size: 1em;
+    padding: 0.6rem;
+    width: fit-content;
+}
+
+.sent {
+    align-items: flex-end;
+}
+
+.message-details {
+    display: flex;
+    flex-direction: row;
+    gap: 0.5rem;
+    font-size: 0.9rem;;
+}
+
+.message-time {
+    color: rgba(255, 255, 255, 0.5);
+}
+
+.message-sender {
+    color: white;
+    width: fit-content;
+}
+
+/* div.message-div:not(:has(div.message-sender)) {
+    margin-bottom: 0;
+} */
 
 .send-div {
     display: flex;
