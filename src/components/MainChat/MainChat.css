@@ -13,7 +13,7 @@
     flex: auto;
     display: flex;
     flex-direction: column;
-    overflow-y: scroll;
+    overflow-y: auto;
 }
 
 .message-div {

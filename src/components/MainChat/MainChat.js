@@ -15,7 +15,6 @@ const MainChat = () => {
     let recClass = selected !== null && channels.findIndex(obj => obj.id === selected.id) !== -1 ? "Channel" : "User";
 
     const retrieveMessages = async () => {
-
         const response = await fetch(`${url}messages?receiver_id=${selected.id}&receiver_class=${recClass}`,  {
             method: 'GET',
             headers: {
