@@ -21,7 +21,6 @@ const MainChat = () => {
         });
 
         const data = await response.json();
-        console.log(data['data']);
         setMessages(data['data']);
     }
 
@@ -42,7 +41,7 @@ const MainChat = () => {
         });
 
         const data = await response.json();
-        setMessages([...messages, data]);
+        setMessages([data]);
     }
 
     useEffect(() => {
