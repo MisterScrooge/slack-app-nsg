@@ -1,0 +1,54 @@
+.popup-overlay-div {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+}
+
+.popup {
+    color: rgba(255, 255, 255, 0.8);
+    background: #2b2b36;
+    border: 2px solid #3f4151;
+    border-collapse: collapse;
+    border-radius: 5px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 2;
+    width: 90%;
+    max-width: 700px;
+}
+
+.overlay {
+    background: rgba(0, 0, 0, 0.5);
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+}
+
+.popup-header {
+    font-size: 1.5em;
+    font-weight: 600;
+    border-bottom: 2px solid #3f4151;
+    padding: 1rem 1rem 0.2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.fa-xmark {
+    font-size: 1.2rem;
+    border-radius: 50%;
+    width: 2.5rem;
+    height: 2.5rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.fa-xmark:hover {
+    cursor: pointer;
+    background: rgba(255, 255, 255, 0.1);
+}
