@@ -2,6 +2,7 @@ import { useContext, useEffect, useState } from "react";
 import { ChannelDetails, ChannelsContext } from "../../contexts/ChannelsContext";
 import { LoginHeaders, LoginInfo } from "../../contexts/LoginContext";
 import { SelectedContext } from "../../contexts/SelectedContext";
+import ChannelDetailsPopup from "../Popup/ChannelDetailsPopup/ChannelDetailsPopup";
 import "./MainChat.css";
 
 const MainChat = () => {
@@ -12,8 +13,13 @@ const MainChat = () => {
     const {loginInfo} = useContext(LoginInfo);
     const [send, setSend] = useState("");
     const [messages, setMessages] = useState([]);
+    const [isToggled, setIsToggled] = useState(false);
     const url = "http://206.189.91.54/api/v1/";
     let recClass = selected && channels.includes(selected) ? "Channel" : "User";
+
+    const handleToggle = () => {
+        setIsToggled(!isToggled);
+    }
 
     const retrieveChannelDetails = async () => {
         const response = await fetch(`${url}channels/${selected.id}`,  {
@@ -30,12 +36,7 @@ const MainChat = () => {
     const retrieveMessages = async () => {
         const response = await fetch(`${url}messages?receiver_id=${selected.id}&receiver_class=${recClass}`,  {
             method: 'GET',
-            headers: {
-                'access-token': loginHeaders['access-token'],
-                'expiry': loginHeaders['expiry'],
-                'uid': loginHeaders['uid'],
-                'client': loginHeaders['client']
-            }
+            headers: {...loginHeaders}
         });
 
         if(response.status === 200) {
@@ -51,10 +52,7 @@ const MainChat = () => {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
-                'access-token': loginHeaders['access-token'],
-                'expiry': loginHeaders['expiry'],
-                'uid': loginHeaders['uid'],
-                'client': loginHeaders['client']
+                ...loginHeaders
             },
             body: JSON.stringify({
                 'receiver_id': selected.id,
@@ -64,7 +62,6 @@ const MainChat = () => {
         });
 
         if(response.status === 200) {
-            const data = await response.json();
             retrieveMessages();
         }
     }
@@ -87,8 +84,10 @@ const MainChat = () => {
             {selected && <>
             <div className="header chat-header">
                 {selected.name}
-                <i className="fa-solid fa-user-group"></i>
+                <i className="fa-solid fa-user-group" onClick={handleToggle}></i>
             </div>
+
+            {isToggled && <ChannelDetailsPopup handleToggle={handleToggle}/>}
 
             <div className="messages-div">
                 {messages && messages.length > 0 && messages.map((message, i) => {
