@@ -1,4 +1,5 @@
 import { useContext, useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { ChannelDetails, ChannelsContext } from "../../contexts/ChannelsContext";
 import { LoginHeaders, LoginInfo } from "../../contexts/LoginContext";
 import { SelectedContext } from "../../contexts/SelectedContext";
@@ -14,6 +15,7 @@ const MainChat = () => {
     const [send, setSend] = useState("");
     const [messages, setMessages] = useState([]);
     const [isToggled, setIsToggled] = useState(false);
+    const navigate = useNavigate();
     const url = "http://206.189.91.54/api/v1/";
     let recClass = selected && channels.includes(selected) ? "Channel" : "User";
 
@@ -84,7 +86,7 @@ const MainChat = () => {
             {selected && <>
             <div className="header chat-header">
                 {selected.name}
-                <i className="fa-solid fa-user-group" onClick={handleToggle}></i>
+                <i className="fa-solid fa-user-group" onClick={e => {handleToggle()}}></i>
             </div>
 
             {isToggled && <ChannelDetailsPopup handleToggle={handleToggle}/>}

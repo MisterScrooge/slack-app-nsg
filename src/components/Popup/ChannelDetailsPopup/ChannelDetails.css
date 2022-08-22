@@ -1,0 +1,48 @@
+.channel-details-popup {
+    height: 90%;
+    max-height: 600px;
+    width: 90%;
+    max-width: 550px;
+}
+
+.channel-details-popup .popup-body {
+    background: rgba(255, 255, 255, 0.1);
+    padding: 1rem;
+}
+
+.popup-nav {
+    border-bottom: 2px solid #3f4151;
+}
+
+.popup-nav-item {
+    width: fit-content;
+    font-size: 0.9em;
+    padding: 0.5rem 1rem 0.2rem;
+}
+
+.popup-nav-item:hover {
+    background: rgba(255, 255, 255, 0.1);
+    color: white;
+    cursor: pointer;
+}
+
+.active {
+    background: rgba(255, 255, 255, 0.1);
+    border-bottom: 2px solid #2b2b36;
+}
+
+.channel-members {
+    display: flex;
+    flex-direction: column;
+    border-radius: 5px;
+}
+
+.member {
+    background: #2b2b36;
+    font-size: 1.1em;
+    padding: 0.5rem;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 0.5rem;
+}
