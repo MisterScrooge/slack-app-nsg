@@ -13,14 +13,13 @@ const MainChat = () => {
     const [send, setSend] = useState("");
     const [messages, setMessages] = useState([]);
     const url = "http://206.189.91.54/api/v1/";
-    let recClass = selected && channels.findIndex(obj => obj.id === selected.id) !== -1 ? "Channel" : "User";
+    let recClass = selected && channels.includes(selected) ? "Channel" : "User";
 
     const retrieveChannelDetails = async () => {
         const response = await fetch(`${url}channels/${selected.id}`,  {
             method: 'GET',
             headers: {...loginHeaders}
         });
-
 
         if(response.status === 200) {
             const data = await response.json();
@@ -31,7 +30,12 @@ const MainChat = () => {
     const retrieveMessages = async () => {
         const response = await fetch(`${url}messages?receiver_id=${selected.id}&receiver_class=${recClass}`,  {
             method: 'GET',
-            headers: {...loginHeaders}
+            headers: {
+                'access-token': loginHeaders['access-token'],
+                'expiry': loginHeaders['expiry'],
+                'uid': loginHeaders['uid'],
+                'client': loginHeaders['client']
+            }
         });
 
         if(response.status === 200) {
@@ -47,7 +51,10 @@ const MainChat = () => {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
-                ...loginHeaders
+                'access-token': loginHeaders['access-token'],
+                'expiry': loginHeaders['expiry'],
+                'uid': loginHeaders['uid'],
+                'client': loginHeaders['client']
             },
             body: JSON.stringify({
                 'receiver_id': selected.id,
@@ -58,21 +65,19 @@ const MainChat = () => {
 
         if(response.status === 200) {
             const data = await response.json();
-            setMessages([data]);
+            retrieveMessages();
         }
     }
 
     useEffect(() => {
-        recClass = channels.findIndex(obj => obj.id === selected.id) !== -1 ? "Channel" : "User";
+        recClass = channels.includes(selected) ? "Channel" : "User";
         setSend("");
 
         if(selected) {
             retrieveMessages();
 
             if(recClass === "Channel") {
-                setInterval(() => {
-                    retrieveChannelDetails();
-                }, 1000);
+                retrieveChannelDetails();
             }
         }
     }, [selected]);
@@ -86,7 +91,7 @@ const MainChat = () => {
             </div>
 
             <div className="messages-div">
-                {messages.length > 0 && messages.map((message, i) => {
+                {messages && messages.length > 0 && messages.map((message, i) => {
                     const time = message['created_at'].slice(11, 16);
                     const myMessage = message.sender.id === loginInfo.data.id;
 
@@ -117,7 +122,7 @@ const MainChat = () => {
                     onInput={e => setSend(e.target.value)}
                 />
 
-                <div className="send-btn" onClick={e => sendMessage(e, send)}>
+                <div className="send-btn" type="submit">
                     <i className="fa-solid fa-paper-plane"></i>
                     Send
                 </div>

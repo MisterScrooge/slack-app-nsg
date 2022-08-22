@@ -29,6 +29,7 @@
 
 .messages-div {
     flex: auto;
+    max-height: 77%;
     display: flex;
     flex-direction: column;
     overflow-y: auto;

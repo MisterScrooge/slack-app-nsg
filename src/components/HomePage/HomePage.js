@@ -39,13 +39,13 @@ const HomePage = () => {
     }
 
     useEffect(() => {
-        retrieveUsers();
         retrieveChannels();
+        retrieveUsers();
 
         if(!selected && channels.length > 0) {
             updateSelected(channels[0]);
         }
-    });
+    }, [loginHeaders]);
 
     return(
         <div className="homepage">
