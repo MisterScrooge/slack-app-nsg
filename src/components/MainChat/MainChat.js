@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from "react";
+import { Component, useContext, useEffect, useState } from "react";
 import { ChannelsContext } from "../../contexts/ChannelsContext";
 import { LoginHeaders, LoginInfo } from "../../contexts/LoginContext";
 import { SelectedContext } from "../../contexts/SelectedContext";
@@ -12,17 +12,12 @@ const MainChat = () => {
     const [send, setSend] = useState("");
     const [messages, setMessages] = useState([]);
     const url = "http://206.189.91.54/api/v1/";
-    let recClass = selected !== null && channels.findIndex(obj => obj.id === selected.id) !== -1 ? "Channel" : "User";
+    let recClass = selected && channels.findIndex(obj => obj.id === selected.id) !== -1 ? "Channel" : "User";
 
     const retrieveMessages = async () => {
         const response = await fetch(`${url}messages?receiver_id=${selected.id}&receiver_class=${recClass}`,  {
             method: 'GET',
-            headers: {
-                'expiry': loginHeaders['expiry'],
-                'uid': loginHeaders['uid'],
-                'access-token': loginHeaders['access-token'],
-                'client': loginHeaders['client']
-            }
+            headers: {...loginHeaders}
         });
 
         const data = await response.json();
@@ -37,10 +32,7 @@ const MainChat = () => {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
-                'expiry': loginHeaders['expiry'],
-                'uid': loginHeaders['uid'],
-                'access-token': loginHeaders['access-token'],
-                'client': loginHeaders['client']
+                ...loginHeaders
             },
             body: JSON.stringify({
                 'receiver_id': selected.id,
@@ -50,8 +42,7 @@ const MainChat = () => {
         });
 
         const data = await response.json();
-        console.log(data);
-        retrieveMessages();
+        setMessages([...messages, data]);
     }
 
     useEffect(() => {
@@ -68,7 +59,7 @@ const MainChat = () => {
             {selected && <><div className="header chat-header">{selected.name}</div>
 
             <div className="messages-div">
-                {messages.map((message, i) => {
+                {messages.length > 0 && messages.map((message, i) => {
                     const time = message['created_at'].slice(11, 16);
                     const myMessage = message.sender.id === loginInfo.data.id;
 

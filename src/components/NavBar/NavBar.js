@@ -8,7 +8,7 @@ const NavBar = () => {
     const {channels} = useContext(ChannelsContext);
 
     useEffect(() => {
-        if(selected === {} && channels.length > 0) {
+        if(!selected && channels.length > 0) {
             updateSelected(channels[0]);
         }
     }, [channels]);
@@ -22,7 +22,7 @@ const NavBar = () => {
                 {channels.length > 0 && channels.map((channel, i) => {
                     return (
                         <div key={"channel" + channel.id}
-                            className={selected.id === channel.id ? "nav-item selected" : "nav-item"}
+                            className={selected && selected.id === channel.id ? "nav-item selected" : "nav-item"}
                             onClick={() => updateSelected(channels[i])}
                         >
                             <div className="initial">{channel.name[0]}</div>

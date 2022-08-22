@@ -3,7 +3,7 @@ import { createContext, useState } from "react";
 export const SelectedContext = createContext();
 
 export const SelectedProvider = ({children}) => {
-    const [selected, setSelected] = useState(sessionStorage.getItem("selected") === null ? {} : JSON.parse(sessionStorage.getItem("selected")));
+    const [selected, setSelected] = useState(sessionStorage.getItem("selected") === null ? null : JSON.parse(sessionStorage.getItem("selected")));
 
     const updateSelected = (select) => {
         sessionStorage.setItem("selected", JSON.stringify(select));

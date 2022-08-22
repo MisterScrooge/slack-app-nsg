@@ -15,12 +15,7 @@ const HomePage = () => {
     const retrieveChannels = async () => {
         const response = await fetch(`${url}/channels`, {
             method: 'GET',
-            headers: {
-                'expiry': loginHeaders['expiry'],
-                'uid': loginHeaders['uid'],
-                'access-token': loginHeaders['access-token'],
-                'client': loginHeaders['client']
-            }
+            headers: {...loginHeaders}
         });
 
         if(response.status === 200) {
@@ -32,7 +27,7 @@ const HomePage = () => {
     useEffect(() => {
         retrieveChannels();
 
-        if(selected.id === 0) {
+        if(!selected && channels.length > 0) {
             updateSelected(channels[0]);
         }
     });
