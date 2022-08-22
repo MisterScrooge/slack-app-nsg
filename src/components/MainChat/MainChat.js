@@ -1,11 +1,12 @@
 import { useContext, useEffect, useState } from "react";
-import { ChannelsContext } from "../../contexts/ChannelsContext";
+import { ChannelDetails, ChannelsContext } from "../../contexts/ChannelsContext";
 import { LoginHeaders, LoginInfo } from "../../contexts/LoginContext";
 import { SelectedContext } from "../../contexts/SelectedContext";
 import "./MainChat.css";
 
 const MainChat = () => {
     const {channels} = useContext(ChannelsContext);
+    const {updateChannelDetails} = useContext(ChannelDetails);
     const {selected} = useContext(SelectedContext);
     const {loginHeaders} = useContext(LoginHeaders);
     const {loginInfo} = useContext(LoginInfo);
@@ -14,14 +15,29 @@ const MainChat = () => {
     const url = "http://206.189.91.54/api/v1/";
     let recClass = selected && channels.findIndex(obj => obj.id === selected.id) !== -1 ? "Channel" : "User";
 
+    const retrieveChannelDetails = async () => {
+        const response = await fetch(`${url}channels/${selected.id}`,  {
+            method: 'GET',
+            headers: {...loginHeaders}
+        });
+
+
+        if(response.status === 200) {
+            const data = await response.json();
+            updateChannelDetails(data['data']);
+        }
+    }
+
     const retrieveMessages = async () => {
         const response = await fetch(`${url}messages?receiver_id=${selected.id}&receiver_class=${recClass}`,  {
             method: 'GET',
             headers: {...loginHeaders}
         });
 
-        const data = await response.json();
-        setMessages(data['data']);
+        if(response.status === 200) {
+            const data = await response.json();
+            setMessages(data['data']);
+        }
     }
 
     const sendMessage = async (e, message) => {
@@ -40,8 +56,10 @@ const MainChat = () => {
             })
         });
 
-        const data = await response.json();
-        setMessages([data]);
+        if(response.status === 200) {
+            const data = await response.json();
+            setMessages([data]);
+        }
     }
 
     useEffect(() => {
@@ -50,6 +68,12 @@ const MainChat = () => {
 
         if(selected) {
             retrieveMessages();
+
+            if(recClass === "Channel") {
+                setInterval(() => {
+                    retrieveChannelDetails();
+                }, 1000);
+            }
         }
     }, [selected]);
 
