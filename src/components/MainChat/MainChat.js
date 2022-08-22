@@ -1,4 +1,4 @@
-import { Component, useContext, useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { ChannelsContext } from "../../contexts/ChannelsContext";
 import { LoginHeaders, LoginInfo } from "../../contexts/LoginContext";
 import { SelectedContext } from "../../contexts/SelectedContext";
@@ -56,7 +56,11 @@ const MainChat = () => {
 
     return(
         <div className="main">
-            {selected && <><div className="header chat-header">{selected.name}</div>
+            {selected && <>
+            <div className="header chat-header">
+                {selected.name}
+                <i className="fa-solid fa-user-group"></i>
+            </div>
 
             <div className="messages-div">
                 {messages.length > 0 && messages.map((message, i) => {
