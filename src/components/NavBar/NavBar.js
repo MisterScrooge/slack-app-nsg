@@ -2,11 +2,12 @@ import { useContext, useEffect } from "react";
 import { ChannelsContext } from "../../contexts/ChannelsContext";
 import { UsersContext } from "../../contexts/UsersContext";       // S
 import { LoginHeaders } from "../../contexts/LoginContext";
+import { Link } from "react-router-dom";
 import "./NavBar.css"
 
 const NavBar = () => {
-    const {channels, updateChannels} = useContext(ChannelsContext);
-    // const {users, updateUsers} = useContext(UsersContext);      // S
+    const {channels, updateChannels, updateChosenChannel} = useContext(ChannelsContext);
+    const {users, updateUsers} = useContext(UsersContext);      // S
     const {loginHeaders} = useContext(LoginHeaders);
     const url = "http://206.189.91.54/api/v1";
 
@@ -29,29 +30,36 @@ const NavBar = () => {
     }
 
     // S >>>>
-    // const retrieveUsers = async () => {
-    //     const response = await fetch(`${url}/users`, {
-    //         method: 'GET',
-    //         headers: {
-    //             'expiry': loginHeaders['expiry'],
-    //             'uid': loginHeaders['uid'],
-    //             'access-token': loginHeaders['access-token'],
-    //             'client': loginHeaders['client']
-    //         }
-    //     });
+    const retrieveUsers = async () => {
+        const response = await fetch(`${url}/users`, {
+            method: 'GET',
+            headers: {
+                'expiry': loginHeaders['expiry'],
+                'uid': loginHeaders['uid'],
+                'access-token': loginHeaders['access-token'],
+                'client': loginHeaders['client']
+            }
+        });
 
-       
-    //         const data = await response.json();
-    //         console.log(data['data']);
-    //         updateUsers(data['data']);
         
-    // }
+            const data = await response.json();
+            console.log(data['data']);
+            updateUsers(data['data']);
+        
+    }
     // S <<<<
 
     useEffect(() => {
         retrieveChannels();
-        // retrieveUsers();        // S
+        retrieveUsers();        // S
     });
+
+    // S
+    // const chooseChannel = (id) => {
+    //     console.log(`Channel id: ${id}`);
+    //     setChosenChannel(id);
+    //     console.log(chosenChannel)
+    // }
 
     return(
         <div className="nav">
@@ -61,9 +69,9 @@ const NavBar = () => {
                 <h5 className="nav-header">Channels</h5>
                 {channels.length > 0 && channels.map((channel, i) => {
                     return (
-                        <div key={channel.id} className="nav-item">
+                        <div key={channel.id} className="nav-item" onClick={() => updateChosenChannel(channel.id)}>
                             <div className="initial">{channel.name[0]}</div>
-                            {channel.name}
+                            <Link to='/channel/test111'>{channel.name}</Link>
                         </div>
                     )
                 })}
