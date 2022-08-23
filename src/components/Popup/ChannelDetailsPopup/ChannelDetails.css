@@ -84,3 +84,7 @@
 .fa-stopwatch {
     color: #18A558;
 }
+
+.add-member-div .button {
+    margin: 1.5rem auto 0;
+}

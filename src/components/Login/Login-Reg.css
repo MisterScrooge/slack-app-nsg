@@ -63,7 +63,7 @@
 }
 
 .sub-info {
-    color: rgb(115, 115, 115);
+    color: rgb(255, 255, 255, 0.8);
 }
 
 .sub-info:nth-of-type(2) {

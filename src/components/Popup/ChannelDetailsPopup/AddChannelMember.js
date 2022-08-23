@@ -42,8 +42,10 @@ const AddChannelMember = ({retrieveChannelDetails}) => {
     }
 
     return(
-        <div className="channel-details-body">
+        <div className="channel-details-body add-member-div">
             <i className="fa-solid fa-arrow-left-long" onClick={e => navigate("../members")}></i>
+
+            <p className="sub-info">Please enter the email address of the user that you'd like to add to this channel</p>
 
             <form onSubmit={e => handleSubmit(e)}>
                 <div className="form-inner-con">
