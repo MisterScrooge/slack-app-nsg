@@ -1,13 +1,29 @@
 import { useContext, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import { ChannelsContext } from "../../contexts/ChannelsContext";
-import { LoginInfo } from "../../contexts/LoginContext";
+import { LoginHeaders, LoginInfo } from "../../contexts/LoginContext";
 import { SelectedContext } from "../../contexts/SelectedContext";
 import "./NavBar.css"
 
 const NavBar = () => {
-    const {loginInfo} = useContext(LoginInfo);
+    const {updateLoginHeaders} = useContext(LoginHeaders);
+    const {loginInfo, updateLoginInfo} = useContext(LoginInfo);
     const {selected, updateSelected} = useContext(SelectedContext);
     const {channels} = useContext(ChannelsContext);
+    const navigate = useNavigate();
+
+    const handleLogout = () => {
+        updateLoginHeaders(null);
+        updateLoginInfo(null);
+
+        for(let i = sessionStorage.length; i >= 0; i--) {
+            const key = sessionStorage.key(i);
+
+            sessionStorage.removeItem(key);
+        }
+
+        navigate("../")
+    }
 
     useEffect(() => {
         if(!selected && channels.length > 0) {
@@ -42,6 +58,11 @@ const NavBar = () => {
                 <div className="loggedin-user">
                     <i className="fa-solid fa-user"></i>
                     {loginInfo['data'].email}
+                </div>
+
+                <div className="logout" onClick={handleLogout}>
+                    <i class="fa-solid fa-right-from-bracket"></i>
+                    Log out
                 </div>
             </div>
         </div>
