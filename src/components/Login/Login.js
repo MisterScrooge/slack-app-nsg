@@ -7,11 +7,11 @@ const Login = () => {
     const [userInput, setUserInput] = useState({email: '', password: ''});
     const [invalid, setInvalid] = useState(false);
     const url = "http://206.189.91.54/api/v1";
-    const {loginInfo, updateLoginInfo} = useContext(LoginInfo);
-    const {loginHeaders, updateLoginHeaders} = useContext(LoginHeaders);
+    const {updateLoginInfo} = useContext(LoginInfo);
+    const {updateLoginHeaders} = useContext(LoginHeaders);
     const navigate = useNavigate();
 
-    const signUp = async () => {
+    const signIn = async () => {
         updateLoginInfo(userInput);
 
         const response = await fetch(`${url}/auth/sign_in`, {
@@ -33,7 +33,6 @@ const Login = () => {
             });
 
             const data = await response.json();
-            // console.log("data", data);
             updateLoginInfo(data);
 
             navigate("/homepage");
@@ -44,13 +43,8 @@ const Login = () => {
 
     const submitHandler = (e) => {
         e.preventDefault();
-        signUp()
+        signIn()
     }
-
-    useEffect(() => {
-        console.log("loginInfo", loginInfo);
-        console.log("loginHeaders", loginHeaders);
-    });
 
     return (
         <div className="login-reg-con">

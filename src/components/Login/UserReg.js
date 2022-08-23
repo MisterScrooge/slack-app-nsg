@@ -48,7 +48,7 @@ const UserReg = () => {
                     </div>
                 </form>
 
-                <p className="sub-info">Already an account? <span onClick={() => navigate("/")}>Sign in</span></p>
+                <p className="sub-info">Already have an account? <span onClick={() => navigate("/")}>Sign in</span></p>
             </div>
         </div>
     )
