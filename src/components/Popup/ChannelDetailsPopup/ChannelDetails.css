@@ -10,6 +10,11 @@
     padding: 1rem;
 }
 
+.popup-nav {
+    display: flex;
+    justify-content: flex-start;
+}
+
 .popup-nav-item {
     width: fit-content;
     font-size: 0.9em;
