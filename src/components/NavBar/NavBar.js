@@ -61,7 +61,7 @@ const NavBar = () => {
                 </div>
 
                 <div className="logout" onClick={handleLogout}>
-                    <i class="fa-solid fa-right-from-bracket"></i>
+                    <i className="fa-solid fa-right-from-bracket"></i>
                     Log out
                 </div>
             </div>
