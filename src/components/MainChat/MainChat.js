@@ -23,7 +23,7 @@ const MainChat = () => {
         if(isToggled) {
             navigate("/homepage");
         } else {
-            navigate("*/members");
+            navigate("./members");
         }
 
         setIsToggled(!isToggled);

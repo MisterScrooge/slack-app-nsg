@@ -1,7 +1,7 @@
 import { useContext, useState, useEffect } from "react";
 import { useNavigate, Route, Routes } from "react-router-dom";
 import { ChannelDetails } from "../../../contexts/ChannelsContext";
-import { LoginHeaders } from "../../../contexts/LoginContext";
+import AddChannelMember from "./AddChannelMember";
 import ChannelMembers from "./ChannelMembers";
 import "../Popup.css"
 import "./ChannelDetails.css"
@@ -25,14 +25,15 @@ const ChannelDetailsPopup = ({handleToggle, retrieveChannelDetails}) => {
 
                 <div className="popup-nav">
                     <div className={toggled === "members" ? "popup-nav-item active" : "popup-nav-item"}
-                        onClick={e => navigate("/members")}>
+                        onClick={e => navigate("./members")}>
                         Members
                     </div>
                 </div>
 
                 <div className="popup-body">
                     <Routes>
-                        <Route path="*/members" element={<ChannelMembers retrieveChannelDetails={retrieveChannelDetails}/>}/>
+                        <Route path="/members" element={<ChannelMembers />}/>
+                        <Route path="/members/add-new-member" element={<AddChannelMember retrieveChannelDetails={retrieveChannelDetails}/>}/>
                     </Routes>
                 </div>
             </div>
