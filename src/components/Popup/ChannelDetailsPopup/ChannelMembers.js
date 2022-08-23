@@ -12,7 +12,7 @@ const ChannelMembers = () => {
         <div className="channel-details-body">
             <div className="button" onClick={e => navigate("./add-new-member")}>+ Add a new member</div>
 
-            <div className="channel-members">
+            <div className="channel-details-div channel-members">
                 {channelDetails['channel_members'].map((member, i) => {
                     const idx = users.findIndex(user => user.id === member['user_id']);
                     const user = users[idx];

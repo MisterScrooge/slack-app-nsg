@@ -1,6 +1,6 @@
 .channel-details-popup {
     height: 90%;
-    max-height: 600px;
+    max-height: 400px;
     width: 90%;
     max-width: 550px;
 }
@@ -40,13 +40,17 @@
 }
 
 .channel-members {
+    overflow-y: auto;
+    max-height: 210px;
+}
+
+.channel-details-div {
     display: flex;
     flex-direction: column;
     border-radius: 5px;
-    /* border: 2px solid #3f4151; */
-    overflow-y: auto;
 }
 
+.channel-details-div div,
 .member {
     background: #2b2b36;
     font-size: 1.1em;
@@ -55,6 +59,8 @@
     justify-content: flex-start;
     align-items: center;
     gap: 0.5rem;
+    overflow: visible;
+    border-bottom: 1px solid #1a1924;
 }
 
 .fa-arrow-left-long {
