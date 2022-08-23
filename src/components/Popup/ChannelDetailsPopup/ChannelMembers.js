@@ -28,18 +28,22 @@ const ChannelMembers = ({retrieveChannelDetails}) => {
     }
 
     return(
-        <div className="channel-members">
-            {channelDetails['channel_members'].map((member, i) => {
-                const idx = users.findIndex(user => user.id === member['user_id']);
-                const user = users[idx];
+        <div className="channel-details-body">
+            <div className="button">+ Add a new member</div>
 
-                return(
-                    <div key={"member" + i} className="member">
-                        <div className="initial">{user.email[0].toUpperCase()}</div>
-                        {user.email}
-                    </div>
-                )
-            })}
+            <div className="channel-members">
+                {channelDetails['channel_members'].map((member, i) => {
+                    const idx = users.findIndex(user => user.id === member['user_id']);
+                    const user = users[idx];
+
+                    return(
+                        <div key={"member" + i} className="member">
+                            <div className="initial">{user.email[0].toUpperCase()}</div>
+                            {user.email}
+                        </div>
+                    )
+                })}
+            </div>
         </div>
     )
 }

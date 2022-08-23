@@ -54,3 +54,16 @@
 .popup-body {
     height: 100%;
 }
+
+.button {
+    background: #5d61ed;
+    color: white;
+    width: fit-content;
+    border-radius: 5px;
+    padding: 0.5rem 1rem;
+}
+
+.button:hover {
+    cursor: pointer;
+    background: #6e72ee;
+}
