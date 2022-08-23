@@ -8,6 +8,8 @@
 }
 
 .nav {
+    display: flex;
+    flex-direction: column;
     grid-area: nav;
     padding: 1rem 0;
     background: #1a1924;

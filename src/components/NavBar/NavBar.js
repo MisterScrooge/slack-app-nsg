@@ -1,9 +1,11 @@
 import { useContext, useEffect } from "react";
 import { ChannelsContext } from "../../contexts/ChannelsContext";
+import { LoginInfo } from "../../contexts/LoginContext";
 import { SelectedContext } from "../../contexts/SelectedContext";
 import "./NavBar.css"
 
 const NavBar = () => {
+    const {loginInfo} = useContext(LoginInfo);
     const {selected, updateSelected} = useContext(SelectedContext);
     const {channels} = useContext(ChannelsContext);
 
@@ -34,6 +36,13 @@ const NavBar = () => {
 
             <div className="nav-list">
                 <h5 className="nav-header">Direct Messages</h5>
+            </div>
+
+            <div className="footer">
+                <div className="loggedin-user">
+                    <i className="fa-solid fa-user"></i>
+                    {loginInfo['data'].email}
+                </div>
             </div>
         </div>
     )

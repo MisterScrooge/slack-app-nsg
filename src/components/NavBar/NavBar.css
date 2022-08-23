@@ -39,3 +39,22 @@
     justify-content: center;
     align-items: center;
 }
+
+.footer {
+    margin: auto 0 0;
+    padding: 0.5rem 1rem 0;
+}
+
+.loggedin-user {
+    color: white;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 0.7rem;
+}
+
+.fa-user {
+    border: 1px solid white;
+    border-radius: 50%;
+    padding: 0.2rem;
+}
