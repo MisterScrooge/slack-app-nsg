@@ -17,8 +17,14 @@ const AboutChannel = () => {
     return(
         <div className="channels-details-body">
             <div className="channel-details-div channel-about">
-                <div>Owned by {ownerEmail}</div>
-                <div>Created on {createDate}</div>
+                <div>
+                    <i className="fa-solid fa-crown"></i>
+                    Owned by {ownerEmail}
+                </div>
+                <div>
+                    <i class="fa-solid fa-stopwatch"></i>
+                    Created on {createDate}
+                </div>
             </div>
         </div>
     )
