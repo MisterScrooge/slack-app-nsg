@@ -3,10 +3,11 @@ import { useNavigate } from "react-router-dom";
 import { ChannelDetails, ChannelsContext } from "../../contexts/ChannelsContext";
 import { LoginHeaders, LoginInfo } from "../../contexts/LoginContext";
 import { SelectedContext } from "../../contexts/SelectedContext";
+import AddDirectMessage from "../Popup/AddDirectMessage/AddDirectMessage";
 import ChannelDetailsPopup from "../Popup/ChannelDetailsPopup/ChannelDetailsPopup";
 import "./MainChat.css";
 
-const MainChat = () => {
+const MainChat = ({isAddDMToggled, handleDMToggle}) => {
     const {channels} = useContext(ChannelsContext);
     const {updateChannelDetails} = useContext(ChannelDetails);
     const {selected} = useContext(SelectedContext);
@@ -96,6 +97,7 @@ const MainChat = () => {
             </div>
 
             {isToggled && <ChannelDetailsPopup handleToggle={handleToggle} retrieveChannelDetails={retrieveChannelDetails}/>}
+            {isAddDMToggled && <AddDirectMessage handleToggle={handleDMToggle} />}
 
             <div className="messages-div">
                 {messages && messages.length > 0 && messages.map((message, i) => {

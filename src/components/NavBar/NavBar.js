@@ -5,7 +5,7 @@ import { LoginHeaders, LoginInfo } from "../../contexts/LoginContext";
 import { SelectedContext } from "../../contexts/SelectedContext";
 import "./NavBar.css"
 
-const NavBar = () => {
+const NavBar = ({handleDMToggle}) => {
     const {updateLoginHeaders} = useContext(LoginHeaders);
     const {loginInfo, updateLoginInfo} = useContext(LoginInfo);
     const {selected, updateSelected} = useContext(SelectedContext);
@@ -53,7 +53,7 @@ const NavBar = () => {
             <div className="nav-list">
                 <h5 className="nav-header">
                     Direct Messages
-                    <i class="fa-solid fa-plus"></i>
+                    <i className="fa-solid fa-plus" onClick={handleDMToggle}></i>
                 </h5>
             </div>
 
