@@ -1,0 +1,26 @@
+.add-dm-popup {
+    height: 80%;
+    max-height: 300px;
+    width: 90%;
+    max-width: 500px;
+}
+
+.add-dm-popup .popup-body {
+    height: 80%;
+}
+
+.add-dm-popup .form-con {
+    position: relative;
+    height: 100%;
+    width: 100%;
+    max-width: none;
+    padding: 1rem;
+}
+
+.add-dm-popup .form-inner-con {
+    margin-bottom: 1rem;
+}
+
+.add-dm-popup .button{
+    margin: auto auto 0;
+}
