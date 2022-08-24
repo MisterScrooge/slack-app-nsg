@@ -88,3 +88,17 @@
 .add-member-div .button {
     margin: 1.5rem auto 0;
 }
+
+.success-add,
+.failed-add {
+    font-size: 0.9em;
+    font-style: italic;
+}
+
+.success-add {
+    color: #18A558;
+}
+
+.failed-add {
+    color: #F83839;
+}

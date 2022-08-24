@@ -1,4 +1,4 @@
-import { useState, useContext } from "react";
+import { useState, useContext, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { ChannelDetails } from "../../../contexts/ChannelsContext";
 import { LoginHeaders } from "../../../contexts/LoginContext";
@@ -9,6 +9,8 @@ const AddChannelMember = ({retrieveChannelDetails}) => {
     const {channelDetails} = useContext(ChannelDetails);
     const {users} = useContext(UsersContext);
     const [newMemberEmail, setNewMemberEmail] = useState("");
+    const [resMessage, setResMessage] = useState("");
+    const [success, setSuccess] = useState("");
     const navigate = useNavigate();
     const url = "http://206.189.91.54/api/v1/";
 
@@ -27,25 +29,42 @@ const AddChannelMember = ({retrieveChannelDetails}) => {
 
         if(response.status === 200) {
             retrieveChannelDetails();
+            setSuccess(true);
+            setResMessage(`${newMemberEmail} has been successfully added to this channel!`);
+            setNewMemberEmail("");
         }
     }
 
     const handleSubmit = (e) => {
         e.preventDefault();
 
+        if(newMemberEmail.trim().length === 0) {
+            return;
+        }
+
         const idx = users.findIndex(user => user.email === newMemberEmail.trim());
 
         if(idx !== -1) {
             addMember(users[idx]);
-            setNewMemberEmail("");
+        } else {
+            setSuccess(false);
+            setResMessage(`${newMemberEmail.trim()} is not a user!`);
         }
     }
+
+    useEffect(() => {
+        setResMessage(" ");
+        console.log(resMessage);
+    }, []);
 
     return(
         <div className="channel-details-body add-member-div">
             <i className="fa-solid fa-arrow-left-long" onClick={e => navigate("../members")}></i>
 
-            <p className="sub-info">Please enter the email address of the user that you'd like to add to this channel</p>
+            <div>
+                <p className="sub-info">Please enter the email address of the user that you'd like to add to this channel</p>
+                <p className={success ? "success-add" : "failed-add"}>{resMessage}</p>
+            </div>
 
             <form onSubmit={e => handleSubmit(e)}>
                 <div className="form-inner-con">
