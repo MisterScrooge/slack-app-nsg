@@ -52,6 +52,7 @@
     font-size: 1em;
     padding: 0.6rem;
     width: fit-content;
+    max-width: 60%;
 }
 
 .sent {

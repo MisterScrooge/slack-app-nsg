@@ -3,18 +3,23 @@ import { useNavigate } from "react-router-dom";
 import { ChannelsContext } from "../../contexts/ChannelsContext";
 import { LoginHeaders, LoginInfo } from "../../contexts/LoginContext";
 import { SelectedContext } from "../../contexts/SelectedContext";
+import { UserDMsContext } from "../../contexts/UserDMsContext";
 import "./NavBar.css"
 
 const NavBar = ({handleDMToggle}) => {
     const {updateLoginHeaders} = useContext(LoginHeaders);
     const {loginInfo, updateLoginInfo} = useContext(LoginInfo);
     const {selected, updateSelected} = useContext(SelectedContext);
+    const {updateUserDMs} = useContext(UserDMsContext);
     const {channels} = useContext(ChannelsContext);
+    const {userDMs} = useContext(UserDMsContext);
     const navigate = useNavigate();
 
     const handleLogout = () => {
         updateLoginHeaders(null);
         updateLoginInfo(null);
+        updateSelected(null);
+        updateUserDMs([]);
 
         for(let i = sessionStorage.length; i >= 0; i--) {
             const key = sessionStorage.key(i);
@@ -29,7 +34,7 @@ const NavBar = ({handleDMToggle}) => {
         if(!selected && channels.length > 0) {
             updateSelected(channels[0]);
         }
-    }, [channels]);
+    }, []);
 
     return(
         <div className="nav">
@@ -55,6 +60,17 @@ const NavBar = ({handleDMToggle}) => {
                     Direct Messages
                     <i className="fa-solid fa-plus" onClick={handleDMToggle}></i>
                 </h5>
+                {userDMs.length > 0 && userDMs.map((dm, i) => {
+                    return (
+                        <div key={"dm" + dm.id}
+                            className={selected && selected.id === dm.id ? "nav-item selected" : "nav-item"}
+                            onClick={() => updateSelected(userDMs[i])}
+                        >
+                            <div className="initial">{dm.email[0]}</div>
+                            {dm.email}
+                        </div>
+                    )
+                })}
             </div>
 
             <div className="footer">

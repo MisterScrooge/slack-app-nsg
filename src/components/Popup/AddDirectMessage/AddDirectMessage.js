@@ -1,11 +1,14 @@
 import { useState, useContext } from "react";
+import { SelectedContext } from "../../../contexts/SelectedContext";
 import { UsersContext } from "../../../contexts/UsersContext";
+import { UserDMsContext } from "../../../contexts/UserDMsContext";
 import "./AddDirectMessage.css"
 
 const AddDirectMessage = ({handleToggle}) => {
     const {users} = useContext(UsersContext);
+    const {updateSelected} = useContext(SelectedContext);
+    const {userDMs, updateUserDMs} = useContext(UserDMsContext);
     const [email, setEmail] = useState("");
-    const [success, setSuccess] = useState(true);
     const [message, setMessage] = useState("");
 
     const handleSubmit = (e) => {
@@ -18,11 +21,23 @@ const AddDirectMessage = ({handleToggle}) => {
         const idx = users.findIndex(user => user.email === email.trim());
 
         if(idx === -1) {
-            setSuccess(false);
             setMessage(`${email.trim()} is not a user!`);
             return;
         } else {
-            setSuccess(true);
+            setMessage("");
+            updateSelected(users[idx]);
+
+            const tempUserDMs = [...userDMs];
+
+            if(userDMs.includes(users[idx])) {
+                const dmIdx = userDMs.findIndex(user => user.email === email);
+                tempUserDMs.splice(dmIdx, 1);
+            }
+
+            tempUserDMs.unshift(users[idx]);
+            updateUserDMs(tempUserDMs);
+
+            handleToggle();
         }
     }
 
@@ -38,7 +53,7 @@ const AddDirectMessage = ({handleToggle}) => {
                     <form className="form-con" onSubmit={handleSubmit}>
                         <div className="form-inner-con">
                             <p className="sub-info">Please enter the email address of the user that you'd like to send a message to:</p>
-                            <div className={success ? " " : "failed-add"}>{message}</div>
+                            <div className="failed-add">{message}</div>
                         </div>
 
                         <div className="form-inner-con">

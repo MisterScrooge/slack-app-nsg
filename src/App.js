@@ -6,6 +6,7 @@ import UserReg from "./components/Login/UserReg";
 import { ChannelsProvider } from "./contexts/ChannelsContext";
 import { LoginProvider } from "./contexts/LoginContext";
 import { SelectedProvider } from "./contexts/SelectedContext";
+import { UserDMsProvider } from "./contexts/UserDMsContext";
 import { UsersProvider } from "./contexts/UsersContext";
 
 function App() {
@@ -13,13 +14,15 @@ function App() {
     <LoginProvider>
       <UsersProvider>
         <ChannelsProvider>
-          <SelectedProvider>
-            <Routes>
-              <Route path="/" element={<Login />} />
-              <Route path="/userreg" element={<UserReg />}/>
-              <Route path="/homepage/*" element={<HomePage />}/>
-            </Routes>
-          </SelectedProvider>
+          <UserDMsProvider>
+            <SelectedProvider>
+              <Routes>
+                <Route path="/" element={<Login />} />
+                <Route path="/userreg" element={<UserReg />}/>
+                <Route path="/homepage/*" element={<HomePage />}/>
+              </Routes>
+            </SelectedProvider>
+          </UserDMsProvider>
         </ChannelsProvider>
       </UsersProvider>
     </LoginProvider>

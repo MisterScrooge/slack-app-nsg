@@ -71,6 +71,7 @@ const MainChat = ({isAddDMToggled, handleDMToggle}) => {
         });
 
         if(response.status === 200) {
+            setSend("");
             retrieveMessages();
         }
     }
@@ -92,8 +93,8 @@ const MainChat = ({isAddDMToggled, handleDMToggle}) => {
         <div className="main">
             {selected && <>
             <div className="header chat-header">
-                {selected.name}
-                <i className="fa-solid fa-user-group" onClick={handleToggle}></i>
+                {selected.name || selected.email}
+                {recClass === "Channel" && <i className="fa-solid fa-user-group" onClick={handleToggle}></i>}
             </div>
 
             {isToggled && <ChannelDetailsPopup handleToggle={handleToggle} retrieveChannelDetails={retrieveChannelDetails}/>}
@@ -127,7 +128,7 @@ const MainChat = ({isAddDMToggled, handleDMToggle}) => {
                 <input
                     type="text"
                     value={send}
-                    placeholder={"Message " + selected.name}
+                    placeholder={"Message " + (selected.name || selected.email)}
                     onInput={e => setSend(e.target.value)}
                 />
 
