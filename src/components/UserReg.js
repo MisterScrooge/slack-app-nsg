@@ -4,7 +4,6 @@ const UserReg = () => {
     const [emailInput, setEmailInput] = useState('');
     const [passInput, setPassInput] = useState('');
     const [passConfInput, setPassConfInput] = useState('');
-    const [name, setName] = useState('');
 
     const registration = (regData) => {
         console.log("regData", regData);
@@ -23,7 +22,6 @@ const UserReg = () => {
         email: emailInput,
         password: passInput,
         password_confirmation: passConfInput,
-        name: name
     };
 
     const submitHandler = (e) => {
@@ -40,8 +38,6 @@ const UserReg = () => {
                 <input type="text" value={passInput} onInput={e => setPassInput(e.target.value)}></input>
                 <label>Pass conf: </label>
                 <input type="text" value={passConfInput} onInput={e => setPassConfInput(e.target.value)}></input>
-                <label>Name: </label>
-                <input type="text" value={name} onInput={e => setName(e.target.value)}></input>
                 <button onClick={submitHandler}>Submit</button>
             </form>
         </div>

@@ -1,33 +1,53 @@
-import { useState } from "react";
+import { useState, useEffect, useContext } from "react";
+import { LoginHeaders, LoginInfo } from "../context/LoginContext"
 
-const LoginAsync = () => {
-    const url = "http://206.189.91.54/api/v1";
+const Login = () => {
     const [userInfo, setUserInfo] = useState({
         email: '',
-        password: '',
+        password: ''
     })
+    const url = "http://206.189.91.54/api/v1";
+    const {loginInfo, updateLoginInfo} = useContext(LoginInfo);
+    const {loginHeaders, updateLoginHeaders} = useContext(LoginHeaders);
 
-    const signUp = async () => {
-        console.log('userInfo', userInfo);
-        const response = await fetch(`${url}/auth/sign_in`, {
+    const testlogin = async () => {
+        updateLoginInfo(userInfo)
+        console.log('userinfo', userInfo);
+
+        const response = await fetch (`${url}/auth/sign_in`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify(userInfo)
         });
+
+        let test1 = {};
+
+        test1 = {
+            "access-token": response.headers.get("access-token"),
+            "client": response.headers.get("client"),
+            "expiry": response.headers.get("expiry"),
+            "uid": response.headers.get("uid")
+        };
+        updateLoginHeaders(test1);
+
+        console.log(test1);
+
         const data = await response.json();
-        console.log(data);
-
-        for (let [key, value] of response.headers) {
-            console.log(`${key} = ${value}`);
-          }
+        console.log("data", data);
+        updateLoginInfo(data)
     }
 
-    const submitHandler = (e) => {
+    const submitHandler = (e) => {  
         e.preventDefault();
-        signUp(userInfo)
+        testlogin(userInfo)
     }
+
+    useEffect(() => {
+        console.log("loginInfo", loginInfo);
+        console.log("loginHeaders", loginHeaders);
+    });
 
     return (
         <div>
@@ -42,4 +62,4 @@ const LoginAsync = () => {
     )
 }
 
-export default LoginAsync;
+export default Login;
