@@ -51,7 +51,10 @@ const NavBar = () => {
             </div>
 
             <div className="nav-list">
-                <h5 className="nav-header">Direct Messages</h5>
+                <h5 className="nav-header">
+                    Direct Messages
+                    <i class="fa-solid fa-plus"></i>
+                </h5>
             </div>
 
             <div className="footer">

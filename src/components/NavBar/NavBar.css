@@ -7,6 +7,26 @@
     font-size: 1.2em;
     font-weight: 600;
     padding: 0 1rem 0.5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    user-select: none;
+}
+
+.nav-header .fa-plus {
+    color: transparent;
+    border-radius: 5px;
+    padding: 0.3rem;
+}
+
+.nav-header:hover .fa-plus {
+    color: inherit;
+}
+
+.nav-header .fa-plus:hover {
+    background: rgba(255, 255, 255, 0.1);
+    color: rgba(255, 255, 255, 0.6);
+    cursor: pointer;
 }
 
 .nav-item {
