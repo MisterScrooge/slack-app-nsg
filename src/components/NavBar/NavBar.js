@@ -71,7 +71,7 @@ const NavBar = ({handleDMToggle}) => {
                         <i className="fa-solid fa-caret-down"></i>
                         Direct Messages
                     </div>
-                    <i className="fa-solid fa-plus"></i>
+                    <i className="fa-solid fa-plus" onClick={handleDMToggle}></i>
                 </h5>
 
                 <div className="nav-body">
