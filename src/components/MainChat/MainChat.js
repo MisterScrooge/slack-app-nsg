@@ -3,11 +3,10 @@ import { useNavigate } from "react-router-dom";
 import { ChannelDetails, ChannelsContext } from "../../contexts/ChannelsContext";
 import { LoginHeaders, LoginInfo } from "../../contexts/LoginContext";
 import { SelectedContext } from "../../contexts/SelectedContext";
-import AddDirectMessage from "../Popup/AddDirectMessage/AddDirectMessage";
 import ChannelDetailsPopup from "../Popup/ChannelDetailsPopup/ChannelDetailsPopup";
 import "./MainChat.css";
 
-const MainChat = ({isAddDMToggled, handleDMToggle}) => {
+const MainChat = () => {
     const {channels} = useContext(ChannelsContext);
     const {updateChannelDetails} = useContext(ChannelDetails);
     const {selected} = useContext(SelectedContext);
@@ -98,7 +97,6 @@ const MainChat = ({isAddDMToggled, handleDMToggle}) => {
             </div>
 
             {isToggled && <ChannelDetailsPopup handleToggle={handleToggle} retrieveChannelDetails={retrieveChannelDetails}/>}
-            {isAddDMToggled && <AddDirectMessage handleToggle={handleDMToggle} />}
 
             <div className="messages-div">
                 {messages && messages.length > 0 && messages.map((message, i) => {
@@ -115,6 +113,7 @@ const MainChat = ({isAddDMToggled, handleDMToggle}) => {
                                 </div>
                             :
                                 <div className="message-details">
+                                    <div className="initial">{message.sender.email[0].toUpperCase()}</div>
                                     <div className="message-sender">{message.sender.email}</div>
                                     <div className="message-time">{time}</div>
                                 </div>

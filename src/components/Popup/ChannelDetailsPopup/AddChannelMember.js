@@ -28,6 +28,14 @@ const AddChannelMember = ({retrieveChannelDetails}) => {
         });
 
         if(response.status === 200) {
+            const data = await response.json();
+
+            if(data.hasOwnProperty('errors')) {
+                setSuccess(false);
+                setResMessage(`${newMemberEmail} is already a member of this channel!`);
+                return;
+            }
+
             retrieveChannelDetails();
             setSuccess(true);
             setResMessage(`${newMemberEmail} has been successfully added to this channel!`);
