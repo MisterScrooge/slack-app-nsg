@@ -1,6 +1,8 @@
 import { useNavigate, useState, useContext } from 'react';
 import { LoginHeaders, LoginInfo } from "../../../contexts/LoginContext";
+import { UsersContext } from '../../../contexts/UsersContext';
 import AddMembers from './AddMembers';
+import "./AddChannel.css";
 
 const AddChannel = ({addChannelWindowToggle}) => {
     const url = "http://206.189.91.54/api/v1";
@@ -9,6 +11,7 @@ const AddChannel = ({addChannelWindowToggle}) => {
         name: '',
         user_ids: [],
     });
+    const [tags, setTags] = useState([]);
 
 
     const createChannel = async () => {
@@ -25,13 +28,20 @@ const AddChannel = ({addChannelWindowToggle}) => {
         console.log(data);
     }
 
-    // const submitHandler = (e) => {
-    //     e.preventDefault();
-    //     let list = userInfo.user_ids;
-    //     list.push(userIds)
+    const submitHandler = (e) => {
+        e.preventDefault();
+        console.log('Members to add: ', tags)
+        channelInput.user_ids = tags;
+        console.log('Passed to API: ', channelInput);
+        createChannel(channelInput);
+        addChannelWindowToggle();
 
-    //     create(userInfo)
-    // }
+
+        // let list = userInfo.user_ids;
+        // list.push(userIds)
+
+        // create(userInfo)
+    }
 
 
     return (
@@ -50,10 +60,11 @@ const AddChannel = ({addChannelWindowToggle}) => {
                     <div>
                         <div>
                             <label>Enter Channel name: </label>
-                            <input type="text" value={channelInput.name} onInput={e => setChannelInput({...channelInput, name: e.target.value})}></input>
+                            <input type="text" value={channelInput.name} onInput={e => setChannelInput({...channelInput, name: e.target.value})} className="channel-name-input"></input>
                         </div>
-                        <AddMembers />
-                        <button>+ Add</button>
+                        <label>Name your buddies...</label>
+                        <AddMembers tags={tags} setTags={setTags} channelInput={channelInput} setChannelInput={setChannelInput} />
+                        <button onClick={submitHandler}>+ Add</button>
                     </div>
                 </div>
             </div>
