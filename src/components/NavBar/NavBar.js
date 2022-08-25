@@ -1,8 +1,9 @@
-import { useContext, useEffect } from "react";
+import { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { ChannelsContext } from "../../contexts/ChannelsContext";
 import { LoginHeaders, LoginInfo } from "../../contexts/LoginContext";
 import { SelectedContext } from "../../contexts/SelectedContext";
+import AddChannel from "../Popup/CreateChannel/AddChannel";
 import "./NavBar.css"
 
 const NavBar = () => {
@@ -10,6 +11,7 @@ const NavBar = () => {
     const {loginInfo, updateLoginInfo} = useContext(LoginInfo);
     const {selected, updateSelected} = useContext(SelectedContext);
     const {channels} = useContext(ChannelsContext);
+    const [isOpen, setIsOpen] = useState(false);
     const navigate = useNavigate();
 
     const handleLogout = () => {
@@ -25,6 +27,18 @@ const NavBar = () => {
         navigate("../")
     }
 
+    // S >>>>
+    const addChannelWindowToggle = () => {
+        // if(isOpen) {
+        //     navigate("/homepage");
+        // } else {
+        //     navigate("./members");
+        // }
+        console.log(isOpen);
+        setIsOpen(!isOpen);
+        console.log(isOpen);
+    }
+
     useEffect(() => {
         if(!selected && channels.length > 0) {
             updateSelected(channels[0]);
@@ -36,7 +50,11 @@ const NavBar = () => {
             <h3 className="header">Chats</h3>
 
             <div className="nav-list">
-                <h5 className="nav-header">Channels</h5>
+                <h5 className="nav-header">
+                    Channels
+                    {/* <i className="fa-solid fa-user-group" onClick={handleToggle}></i> */}
+                    <i class="fa-solid fa-plus" onClick={addChannelWindowToggle}></i>
+                </h5>
                 {channels.length > 0 && channels.map((channel, i) => {
                     return (
                         <div key={"channel" + channel.id}
@@ -65,6 +83,8 @@ const NavBar = () => {
                     Log out
                 </div>
             </div>
+
+            {isOpen && <AddChannel addChannelWindowToggle={addChannelWindowToggle} />}
         </div>
     )
 }
