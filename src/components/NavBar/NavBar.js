@@ -48,7 +48,7 @@ const NavBar = ({handleDMToggle}) => {
                         <i className="fa-solid fa-caret-down"></i>
                         Channels
                     </div>
-                    <i className="fa-solid fa-plus" onClick={handleDMToggle}></i>
+                    <i className="fa-solid fa-plus"></i>
                 </h5>
                 <div className="nav-body">
                     {channels.length > 0 && channels.map((channel, i) => {
