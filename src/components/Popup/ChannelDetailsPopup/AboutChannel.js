@@ -22,7 +22,7 @@ const AboutChannel = () => {
                     Owned by {ownerEmail}
                 </div>
                 <div>
-                    <i class="fa-solid fa-stopwatch"></i>
+                    <i className="fa-solid fa-stopwatch"></i>
                     Created on {createDate}
                 </div>
             </div>
