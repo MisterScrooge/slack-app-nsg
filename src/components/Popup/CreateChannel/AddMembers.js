@@ -2,7 +2,7 @@ import { useState, useContext } from "react";
 import { UsersContext } from "../../../contexts/UsersContext";
 import "./AddMembers.css"
 
-const AddMembers = ({tags, setTags}) => {
+const AddMembers = ({tags, setTags, indexTags, setIndexTags}) => {
     const {users} = useContext(UsersContext);
 
     const handleKeyDown = (e) => {
@@ -13,16 +13,21 @@ const AddMembers = ({tags, setTags}) => {
         let idx = users.findIndex(user => user.email === value.trim());
         console.log('idx value: ', idx);
 
-        if(idx !== -1) {
+        if (idx !== -1) {
             const userObject = users[idx];
-            setTags([...tags, userObject.id]);
-            e.target.value = '';
+            setIndexTags([...indexTags, userObject.id]);
             console.log(tags);
+            console.log(indexTags);
+            setTags([...tags, value])
+        } else {
+            alert('😨 Please enter existing user email!')
         }
+        e.target.value = '';
     }
 
     const removeTag = (index) => {
-        setTags(tags.filter((i) => i !== index))
+        setIndexTags(indexTags.filter((el, i) => i !== index));
+        setTags(tags.filter((el, i) => i !== index));
     }
 
     return (

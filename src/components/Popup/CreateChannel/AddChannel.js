@@ -7,11 +7,12 @@ import "./AddChannel.css";
 const AddChannel = ({addChannelWindowToggle}) => {
     const url = "http://206.189.91.54/api/v1";
     const {loginHeaders} = useContext(LoginHeaders);
+    const [tags, setTags] = useState([]);
+    const [indexTags, setIndexTags] = useState([]);
     const [channelInput, setChannelInput] = useState({
         name: '',
         user_ids: [],
     });
-    const [tags, setTags] = useState([]);
 
 
     const createChannel = async () => {
@@ -30,8 +31,9 @@ const AddChannel = ({addChannelWindowToggle}) => {
 
     const submitHandler = (e) => {
         e.preventDefault();
-        console.log('Members to add: ', tags)
-        channelInput.user_ids = tags;
+        console.log('Members to add: ', tags);
+        console.log('Members to add: ', indexTags);
+        channelInput.user_ids = indexTags;
         console.log('Passed to API: ', channelInput);
         createChannel(channelInput);
         addChannelWindowToggle();
@@ -58,13 +60,15 @@ const AddChannel = ({addChannelWindowToggle}) => {
                         <Route path="/about" element={<AboutChannel />}/>
                     </Routes> */}
                     <div>
-                        <div>
+                        <div className="channel-name-container">
                             <label>Enter Channel name: </label>
                             <input type="text" value={channelInput.name} onInput={e => setChannelInput({...channelInput, name: e.target.value})} className="channel-name-input"></input>
                         </div>
                         <label>Name your buddies...</label>
-                        <AddMembers tags={tags} setTags={setTags} channelInput={channelInput} setChannelInput={setChannelInput} />
-                        <button onClick={submitHandler}>+ Add</button>
+                        <AddMembers tags={tags} setTags={setTags} indexTags={indexTags} setIndexTags={setIndexTags} />
+                        <div className="button-container">
+                            <button onClick={submitHandler}>Create</button>
+                        </div>
                     </div>
                 </div>
             </div>
