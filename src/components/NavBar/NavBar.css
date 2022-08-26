@@ -38,6 +38,11 @@
 .fa-caret-down {
     border-radius: 50%;
     padding: 0.2rem 0.4rem;
+    transition: all 0.1s;
+}
+
+.fa-caret-down.hidden {
+    transform: rotate(-90deg);
 }
 
 .nav-header .fa-plus:hover,
