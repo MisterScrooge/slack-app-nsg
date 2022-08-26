@@ -59,12 +59,12 @@ const NavBar = ({handleDMToggle, retrieveChannels}) => {
             <div className="nav-list">
                 <h5 className="nav-header">
                     <div>
-                        <i className="fa-solid fa-caret-down"></i>
+                        <i className={isChannelNavToggled ? "fa-solid fa-caret-down" : "fa-solid fa-caret-down hidden"} onClick={e => setIsChannelNavToggled(!isChannelNavToggled)}></i>
                         Channels
                     </div>
                     <i className="fa-solid fa-plus"  onClick={addChannelWindowToggle}></i>
                 </h5>
-                <div className="nav-body">
+                {isChannelNavToggled && <div className="nav-body">
                     {channels.length > 0 && channels.map((channel, i) => {
                         return (
                             <div key={"channel" + channel.id}
@@ -76,19 +76,19 @@ const NavBar = ({handleDMToggle, retrieveChannels}) => {
                             </div>
                         )
                     })}
-                </div>
+                </div>}
             </div>
 
             <div className="nav-list">
                 <h5 className="nav-header">
                     <div>
-                        <i className="fa-solid fa-caret-down"></i>
+                        <i className={isDMNavToggled ? "fa-solid fa-caret-down" : "fa-solid fa-caret-down hidden"}  onClick={e => setIsDMNavToggled(!isDMNavToggled)}></i>
                         Direct Messages
                     </div>
                     <i className="fa-solid fa-plus" onClick={handleDMToggle}></i>
                 </h5>
 
-                <div className="nav-body">
+                {isDMNavToggled && <div className="nav-body">
                     {userDMs.length > 0 && userDMs.map((dm, i) => {
                         return (
                             <div key={"dm" + dm.id}
@@ -100,7 +100,7 @@ const NavBar = ({handleDMToggle, retrieveChannels}) => {
                             </div>
                         )
                     })}
-                </div>
+                </div>}
             </div>
 
             <div className="footer">
