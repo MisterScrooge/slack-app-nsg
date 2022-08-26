@@ -70,6 +70,7 @@ const MainChat = () => {
         });
 
         if(response.status === 200) {
+            setSend("");
             retrieveMessages();
         }
     }
@@ -91,8 +92,8 @@ const MainChat = () => {
         <div className="main">
             {selected && <>
             <div className="header chat-header">
-                {selected.name}
-                <i className="fa-solid fa-user-group" onClick={handleToggle}></i>
+                {selected.name || selected.email}
+                {recClass === "Channel" && <i className="fa-solid fa-user-group" onClick={handleToggle}></i>}
             </div>
 
             {isToggled && <ChannelDetailsPopup handleToggle={handleToggle} retrieveChannelDetails={retrieveChannelDetails}/>}
@@ -112,6 +113,7 @@ const MainChat = () => {
                                 </div>
                             :
                                 <div className="message-details">
+                                    <div className="initial">{message.sender.email[0].toUpperCase()}</div>
                                     <div className="message-sender">{message.sender.email}</div>
                                     <div className="message-time">{time}</div>
                                 </div>
@@ -125,7 +127,7 @@ const MainChat = () => {
                 <input
                     type="text"
                     value={send}
-                    placeholder={"Message " + selected.name}
+                    placeholder={"Message " + (selected.name || selected.email)}
                     onInput={e => setSend(e.target.value)}
                 />
 

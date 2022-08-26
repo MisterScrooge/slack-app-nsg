@@ -1,12 +1,50 @@
 .nav-list {
-    margin: 2rem 0;
+    margin-top: 2rem;
+}
+
+.nav-body {
+    max-height: 28vh;
+    overflow-y: auto;
 }
 
 .nav-header {
     color: #5a5c65;
-    font-size: 1.2em;
+    font-size: 1.1em;
     font-weight: 600;
     padding: 0 1rem 0.5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    user-select: none;
+}
+
+.nav-header div {
+    display: flex;
+    align-items: center;
+    gap: 0.2rem;
+}
+
+.nav-header .fa-plus {
+    font-size: 0.8em;
+    color: transparent;
+    border-radius: 5px;
+    padding: 0.3rem;
+}
+
+.nav-header:hover .fa-plus {
+    color: inherit;
+}
+
+.fa-caret-down {
+    border-radius: 50%;
+    padding: 0.2rem 0.4rem;
+}
+
+.nav-header .fa-plus:hover,
+.fa-caret-down:hover {
+    background: rgba(255, 255, 255, 0.1);
+    color: rgba(255, 255, 255, 0.6);
+    cursor: pointer;
 }
 
 .nav-item {
@@ -17,6 +55,12 @@
     display: flex;
     align-items: center;
     gap: 0.8rem;
+}
+
+.nav-item-text {
+    text-overflow: ellipsis;
+    -o-text-overflow: ellipsis;
+    -ms-text-overflow: ellipsis;
 }
 
 .nav-item:hover {
@@ -33,7 +77,7 @@
     border-radius: 50%;
     border: 2px solid #393735 !important;
     color: #c19e6b;
-    width: 2rem;
+    min-width: 2rem;
     height: 2rem;
     display: flex;
     justify-content: center;

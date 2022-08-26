@@ -52,6 +52,7 @@
     font-size: 1em;
     padding: 0.6rem;
     width: fit-content;
+    max-width: 60%;
 }
 
 .sent {
@@ -61,8 +62,9 @@
 .message-details {
     display: flex;
     flex-direction: row;
-    gap: 0.5rem;
-    font-size: 0.9rem;;
+    align-items: center;
+    gap: 0.4rem;
+    font-size: 0.9rem;
 }
 
 .message-time {

@@ -8,6 +8,8 @@ export const ChannelsProvider = ({children}) => {
     const [channelDetails, setChannelDetails] = useState(!sessionStorage.getItem("channel_details") ? {} : JSON.parse(sessionStorage.getItem("channel_details")));
 
     const updateChannels = (newChannels) => {
+        console.log(newChannels);
+
         if(typeof newChannels === 'undefined') {
             sessionStorage.setItem("channels", JSON.stringify([]));
             setChannels([]);
