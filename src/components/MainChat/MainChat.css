@@ -1,0 +1,114 @@
+.main {
+    display: flex;
+    flex-direction: column;
+}
+
+.header.chat-header {
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+    border-bottom: 2px solid #3f4151;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.fa-user-group {
+    font-size: 0.5em !important;
+    border-radius: 50%;
+    height: 2.5em;
+    width: 2.5em;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.fa-user-group:hover {
+    cursor: pointer;
+    background: rgba(255, 255, 255, 0.1);
+}
+
+.messages-div {
+    flex: auto;
+    max-height: 77%;
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto;
+    justify-items: flex-end;
+}
+
+.message-div {
+    margin: 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.2rem;
+    overflow: visible;
+}
+
+.message-body {
+    background: #292a2f;
+    border: 2px solid #3f4151;
+    border-radius: 5px;
+    color: white;
+    font-size: 1em;
+    padding: 0.6rem;
+    width: fit-content;
+    max-width: 60%;
+}
+
+.sent {
+    align-items: flex-end;
+}
+
+.message-details {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 0.4rem;
+    font-size: 0.9rem;
+}
+
+.message-time {
+    color: rgba(255, 255, 255, 0.5);
+}
+
+.message-sender {
+    color: white;
+    width: fit-content;
+}
+
+/* div.message-div:not(:has(div.message-sender)) {
+    margin-bottom: 0;
+} */
+
+.send-div {
+    display: flex;
+    padding: 1rem;
+    gap: 1rem;
+}
+
+.send-div input {
+    background: #37393e;
+    border: 2px solid #3f4151;
+    border-radius: 5px;
+    color: white;
+    font-size: 1em;
+    flex: auto;
+    padding: 0.8rem 1rem;
+}
+
+.send-btn {
+    background: #5d61ed;
+    border-radius: 5px;
+    color: white;
+    padding: 0.8rem 1.5rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0.5rem;
+    user-select: none;
+}
+
+.send-btn:hover {
+    cursor: pointer;
+    background: #6e72ee;
+}

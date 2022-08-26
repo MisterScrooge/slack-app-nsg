@@ -1,0 +1,131 @@
+.nav-list {
+    margin-top: 2rem;
+}
+
+.nav-body {
+    max-height: 28vh;
+    overflow-y: auto;
+}
+
+.nav-header {
+    color: #5a5c65;
+    font-size: 1.1em;
+    font-weight: 600;
+    padding: 0 1rem 0.5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    user-select: none;
+}
+
+.nav-header div {
+    display: flex;
+    align-items: center;
+    gap: 0.2rem;
+}
+
+.nav-header .fa-plus {
+    font-size: 0.8em;
+    color: transparent;
+    border-radius: 5px;
+    padding: 0.3rem;
+}
+
+.nav-header:hover .fa-plus {
+    color: inherit;
+}
+
+.fa-caret-down {
+    border-radius: 50%;
+    padding: 0.2rem 0.4rem;
+    transition: all 0.1s;
+}
+
+.fa-caret-down.hidden {
+    transform: rotate(-90deg);
+}
+
+.nav-header .fa-plus:hover,
+.fa-caret-down:hover {
+    background: rgba(255, 255, 255, 0.1);
+    color: rgba(255, 255, 255, 0.6);
+    cursor: pointer;
+}
+
+.nav-item {
+    color: #f3f5f7;
+    font-size: 1em;
+    font-weight: 400;
+    padding: 0.5rem 1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+}
+
+.nav-item-text {
+    text-overflow: ellipsis;
+    -o-text-overflow: ellipsis;
+    -ms-text-overflow: ellipsis;
+}
+
+.nav-item:hover {
+    background: #2b2c32;
+    cursor: pointer;
+}
+
+.nav-item.selected {
+    background: #3f3f5d;
+}
+
+.initial {
+    background: #2a2528;
+    border-radius: 50%;
+    border: 2px solid #393735 !important;
+    color: #c19e6b;
+    min-width: 2rem;
+    height: 2rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.footer {
+    color: white;
+    margin: auto 0 0;
+    padding: 0.5rem 1rem 0;
+}
+
+.loggedin-user {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 0.7rem;
+    margin-bottom: 0.5rem;;
+}
+
+.fa-user {
+    border: 1px solid white;
+    border-radius: 50%;
+    width: 1.5rem;
+    height: 1.5rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.logout {
+    border-radius: 5px;
+    border: 2px solid #3f4151;
+    background: #2b2b36;
+    width: fit-content;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 0.7rem;
+    padding: 0.2rem 0.5rem;
+}
+
+.logout:hover {
+    cursor: pointer;
+    background: #37393e;;
+}
