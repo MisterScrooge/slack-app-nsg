@@ -1,12 +1,13 @@
-import { useContext, useState, useEffect } from "react";
+import { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { ChannelsContext } from "../../contexts/ChannelsContext";
 import { LoginHeaders, LoginInfo } from "../../contexts/LoginContext";
 import { SelectedContext } from "../../contexts/SelectedContext";
+import AddChannel from "../Popup/CreateChannel/AddChannel";
 import { UserDMsContext } from "../../contexts/UserDMsContext";
 import "./NavBar.css"
 
-const NavBar = ({handleDMToggle}) => {
+const NavBar = ({handleDMToggle, retrieveChannels}) => {
     const {updateLoginHeaders} = useContext(LoginHeaders);
     const {loginInfo, updateLoginInfo} = useContext(LoginInfo);
     const {selected, updateSelected} = useContext(SelectedContext);
@@ -14,6 +15,7 @@ const NavBar = ({handleDMToggle}) => {
     const {channels, updateChannels} = useContext(ChannelsContext);
     const [isDMNavToggled, setIsDMNavToggled] = useState(true);
     const [isChannelNavToggled, setIsChannelNavToggled] = useState(true);
+    const [isOpen, setIsOpen] = useState(false);
     const navigate = useNavigate();
 
     const handleLogout = () => {
@@ -32,6 +34,18 @@ const NavBar = ({handleDMToggle}) => {
         navigate("../")
     }
 
+    // S >>>>
+    const addChannelWindowToggle = () => {
+        // if(isOpen) {
+        //     navigate("/homepage");
+        // } else {
+        //     navigate("./members");
+        // }
+        console.log(isOpen);
+        setIsOpen(!isOpen);
+        console.log(isOpen);
+    }
+
     useEffect(() => {
         if(!selected && channels.length > 0) {
             updateSelected(channels[0]);
@@ -48,7 +62,7 @@ const NavBar = ({handleDMToggle}) => {
                         <i className="fa-solid fa-caret-down"></i>
                         Channels
                     </div>
-                    <i className="fa-solid fa-plus"></i>
+                    <i className="fa-solid fa-plus"  onClick={addChannelWindowToggle}></i>
                 </h5>
                 <div className="nav-body">
                     {channels.length > 0 && channels.map((channel, i) => {
@@ -100,6 +114,8 @@ const NavBar = ({handleDMToggle}) => {
                     Log out
                 </div>
             </div>
+
+            {isOpen && <AddChannel addChannelWindowToggle={addChannelWindowToggle} retrieveChannels={retrieveChannels} />}
         </div>
     )
 }

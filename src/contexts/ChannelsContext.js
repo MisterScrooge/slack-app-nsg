@@ -13,6 +13,7 @@ export const ChannelsProvider = ({children}) => {
         if(typeof newChannels === 'undefined') {
             sessionStorage.setItem("channels", JSON.stringify([]));
             setChannels([]);
+            console.log('if happened'); //  S
             return;
         }
 
