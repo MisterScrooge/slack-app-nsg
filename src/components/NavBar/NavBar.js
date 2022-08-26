@@ -6,7 +6,7 @@ import { SelectedContext } from "../../contexts/SelectedContext";
 import AddChannel from "../Popup/CreateChannel/AddChannel";
 import "./NavBar.css"
 
-const NavBar = () => {
+const NavBar = ({retrieveChannels}) => {
     const {updateLoginHeaders} = useContext(LoginHeaders);
     const {loginInfo, updateLoginInfo} = useContext(LoginInfo);
     const {selected, updateSelected} = useContext(SelectedContext);
@@ -84,7 +84,7 @@ const NavBar = () => {
                 </div>
             </div>
 
-            {isOpen && <AddChannel addChannelWindowToggle={addChannelWindowToggle} />}
+            {isOpen && <AddChannel addChannelWindowToggle={addChannelWindowToggle} retrieveChannels={retrieveChannels} />}
         </div>
     )
 }

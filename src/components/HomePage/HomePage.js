@@ -49,7 +49,7 @@ const HomePage = () => {
 
     return(
         <div className="homepage">
-            <NavBar />
+            <NavBar retrieveChannels={retrieveChannels} />
             <MainChat />
         </div>
     )

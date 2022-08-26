@@ -1,12 +1,14 @@
 import { useNavigate, useState, useContext } from 'react';
 import { LoginHeaders, LoginInfo } from "../../../contexts/LoginContext";
+import { ChannelsContext } from '../../../contexts/ChannelsContext';
 import { UsersContext } from '../../../contexts/UsersContext';
 import AddMembers from './AddMembers';
 import "./AddChannel.css";
 
-const AddChannel = ({addChannelWindowToggle}) => {
+const AddChannel = ({addChannelWindowToggle, retrieveChannels}) => {
     const url = "http://206.189.91.54/api/v1";
     const {loginHeaders} = useContext(LoginHeaders);
+    const {updateChannels} = useContext(ChannelsContext);
     const [tags, setTags] = useState([]);
     const [indexTags, setIndexTags] = useState([]);
     const [channelInput, setChannelInput] = useState({
@@ -21,12 +23,15 @@ const AddChannel = ({addChannelWindowToggle}) => {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
-                ... loginHeaders
+                ...loginHeaders
             },
             body: JSON.stringify(channelInput)
         });
-        const data = await response.json();
-        console.log(data);
+        if (response.ok) {
+            const data = await response.json();
+            console.log('data= ', data);
+            retrieveChannels();
+        }
     }
 
     const submitHandler = (e) => {
@@ -38,10 +43,8 @@ const AddChannel = ({addChannelWindowToggle}) => {
         createChannel(channelInput);
         addChannelWindowToggle();
 
-
         // let list = userInfo.user_ids;
         // list.push(userIds)
-
         // create(userInfo)
     }
 
