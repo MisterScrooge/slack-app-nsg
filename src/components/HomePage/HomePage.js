@@ -100,7 +100,7 @@ const HomePage = () => {
     return(
         <div className="homepage">
             {isAddDMToggled && <AddDirectMessage handleToggle={handleDMToggle} />}
-            <NavBar handleDMToggle={handleDMToggle}/>
+            <NavBar handleDMToggle={handleDMToggle} retrieveChannels={retrieveChannels}/>
             <MainChat isAddDMToggled={isAddDMToggled} handleDMToggle={handleDMToggle}/>
         </div>
     )

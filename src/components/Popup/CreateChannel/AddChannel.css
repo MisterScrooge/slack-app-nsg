@@ -1,0 +1,33 @@
+.channel-name-container {
+    margin-bottom: 6px;
+}
+.channel-name-input {
+    margin-left: 10px;
+    padding: 5px;
+    background-color: #1a1924;
+    border: 1px solid;
+    border-radius: 3px;
+    color: rgba(255, 255, 255, 0.8);
+}
+
+.button-container {
+    margin-top: 10px;
+    display: flex;
+    justify-content: center;
+}
+
+button {
+    background: #5d61ed;
+    border: none;
+    color: white;
+    font-size: 1em;
+    width: fit-content;
+    border-radius: 5px;
+    padding: 0.5rem 1rem;
+    user-select: none;
+}
+
+button:hover {
+    cursor: pointer;
+    background: #6e72ee;
+}
