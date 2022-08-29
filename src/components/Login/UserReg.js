@@ -15,9 +15,9 @@ const UserReg = () => {
             },
             body: JSON.stringify(userInput)
         });
-        
+
         if(response.status === 200) {
-        navigate("/");
+            navigate("/");
         } else {
             return;
         }
@@ -66,8 +66,8 @@ const UserReg = () => {
                     </div>
 
                     <div className="form-inner-con">
-                        <button 
-                            type="Submit" 
+                        <button
+                            type="Submit"
                             className="form-btn"
                             onClick={submitHandler}
                             >Sign up

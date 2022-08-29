@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { ChannelDetails, ChannelsContext } from "../../contexts/ChannelsContext";
 import { LoginHeaders, LoginInfo } from "../../contexts/LoginContext";
@@ -15,6 +15,7 @@ const MainChat = () => {
     const [send, setSend] = useState("");
     const [messages, setMessages] = useState([]);
     const [isToggled, setIsToggled] = useState(false);
+    const bottomRef = useRef(null);
     const navigate = useNavigate();
     const url = "http://206.189.91.54/api/v1/";
     let recClass = selected && channels.includes(selected) ? "Channel" : "User";
@@ -75,6 +76,11 @@ const MainChat = () => {
         }
     }
 
+    const convertToLocalTime = (serverTime) => {
+        const localTime = new Date(serverTime).toLocaleString("en-US", {timeZone: "Asia/Manila"});
+        return localTime.toString();
+    }
+
     useEffect(() => {
         recClass = channels.includes(selected) ? "Channel" : "User";
         setSend("");
@@ -88,6 +94,10 @@ const MainChat = () => {
         }
     }, [selected]);
 
+    useEffect(() => {
+        bottomRef.current?.scrollIntoView({behavior: 'smooth'});
+    }, [messages]);
+
     return(
         <div className="main">
             {selected && <>
@@ -100,7 +110,8 @@ const MainChat = () => {
 
             <div className="messages-div">
                 {messages && messages.length > 0 && messages.map((message, i) => {
-                    const time = message['created_at'].slice(11, 16);
+                    const time = convertToLocalTime(message['created_at']);
+                    console.log(time);
                     const myMessage = message.sender.id === loginInfo.data.id;
 
                     return (
@@ -121,6 +132,7 @@ const MainChat = () => {
                         </div>
                     )
                 })}
+                <div ref={bottomRef}/>
             </div>
 
             <form className="send-div" onSubmit={e => sendMessage(e, send)}>
