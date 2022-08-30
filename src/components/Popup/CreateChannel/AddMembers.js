@@ -4,7 +4,7 @@ import "./AddMembers.css"
 
 const AddMembers = ({tags, setTags, indexTags, setIndexTags}) => {
     const {users} = useContext(UsersContext);
-    const {searchItem, setSearchItem} =useState('');
+    const [searchItem, setSearchItem] = useState("");
 
     const handleKeyDown = (e) => {
         if (e.key !== "Enter") return;
@@ -23,8 +23,9 @@ const AddMembers = ({tags, setTags, indexTags, setIndexTags}) => {
         } else {
             alert('😨 Please enter existing user email!')
         }
-        e.target.value = '';
     }
+
+    const filteredUsers = users.filter(user => user.email.includes(searchItem));
 
     const removeTag = (index) => {
         setIndexTags(indexTags.filter((el, i) => i !== index));
@@ -41,16 +42,17 @@ const AddMembers = ({tags, setTags, indexTags, setIndexTags}) => {
                         <span className="close" onClick={() => removeTag(index)}>&times;</span>
                     </div>
                 )) }
-                <input onKeyDown={handleKeyDown} onChange={e => {setSearchItem(e.target.value)}} type="text" placeholder="...akobudoy@uwu.com" className="tags-input-box" />
+                <input
+                    onKeyDown={handleKeyDown}
+                    value={searchItem}
+                    onInput={e => setSearchItem(e.target.value)}
+                    type="text"
+                    placeholder="...akobudoy@uwu.com"
+                    className="tags-input-box"
+                />
             </div>
             <div className="search-filter-container">
-                {users.filter((value) => {
-                    if (searchItem === "") {
-                        return value
-                    } else if (value.email.toLowerCase().includes(searchItem.toLowerCase())) {
-                        return value
-                    }
-                }).map((value) => {
+                {filteredUsers.map((value) => {
                     return (
                         <div className="search-filter-item">
                             {value.email}
