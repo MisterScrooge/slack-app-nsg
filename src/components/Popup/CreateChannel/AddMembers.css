@@ -41,3 +41,8 @@
     border: none;
     color: rgba(255, 255, 255, 0.8);
 }
+
+.search-filter-container {
+    max-height: 150px;
+    overflow-y: auto;
+}
