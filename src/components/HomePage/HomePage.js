@@ -41,38 +41,51 @@ const HomePage = () => {
             const users = data['data'];
             updateUsers(users);
 
-            const demoUsers = [
-                'nieves1@nieves.com',
-                'nieves2@nieves.com',
-                'shawn@gmail.com',
-                'shawn1@shawn.com',
-                'shawn2@shawn.com',
-                'gene@jimil.com',
-                'gene3@gene.com',
-                'gene4@gene.com'
-                ];
-            const tempUserDMs = [...userDMs];
+            // const demoUsers = [
+            //     'nieves1@nieves.com',
+            //     'nieves2@nieves.com',
+            //     'shawn@gmail.com',
+            //     'shawn1@shawn.com',
+            //     'shawn2@shawn.com',
+            //     'gene@jimil.com',
+            //     'gene3@gene.com',
+            //     'gene4@gene.com'
+            //     ];
+            // const tempUserDMs = [...userDMs];
 
-            for(let i = 0; i < demoUsers.length; i++) {
-                const idx = users.findIndex(user => user.email === demoUsers[i]);
+            // for(let i = 0; i < demoUsers.length; i++) {
+            //     const idx = users.findIndex(user => user.email === demoUsers[i]);
 
-                const response = await fetch(`${url}/messages?receiver_id=${users[idx].id}&receiver_class=User`,  {
-                    method: 'GET',
-                    headers: {...loginHeaders}
-                });
+            //     const response = await fetch(`${url}/messages?receiver_id=${users[idx].id}&receiver_class=User`,  {
+            //         method: 'GET',
+            //         headers: {...loginHeaders}
+            //     });
 
-                if(response.status === 200) {
-                    const data = await response.json();
-                    const messages = data['data'];
-                    console.log(messages);
+            //     if(response.status === 200) {
+            //         const data = await response.json();
+            //         const messages = data['data'];
+            //         console.log(messages);
 
-                    if(messages.length > 0 && tempUserDMs.findIndex(user => user.email === demoUsers[i]) === -1) {
-                        tempUserDMs.push(users[idx]);
-                    }
-                }
-            }
+            //         if(messages.length > 0 && tempUserDMs.findIndex(user => user.email === demoUsers[i]) === -1) {
+            //             tempUserDMs.push(users[idx]);
+            //         }
+            //     }
+            // }
 
-            updateUserDMs([...tempUserDMs]);
+            // updateUserDMs([...tempUserDMs]);
+        }
+    }
+
+    const retrieveRecent = async () => {
+        const response = await fetch(`${url}/users/recent
+        `, {
+            method: 'GET',
+            headers: {...loginHeaders}
+        });
+
+        if(response.status === 200) {
+            const data = await response.json();
+            updateUserDMs(data['data']);
         }
     }
 
@@ -91,6 +104,7 @@ const HomePage = () => {
     useEffect(() => {
         retrieveChannels();
         retrieveUsers();
+        retrieveRecent();
     }, [loginHeaders]);
 
     useEffect(() => {
