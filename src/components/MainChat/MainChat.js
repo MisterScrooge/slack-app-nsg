@@ -109,7 +109,9 @@ const MainChat = () => {
             {isToggled && <ChannelDetailsPopup handleToggle={handleToggle} retrieveChannelDetails={retrieveChannelDetails}/>}
 
             <div className="messages-div">
-                {messages && messages.length > 0 && messages.map((message, i) => {
+                {(!messages || messages.length === 0) ? <div className="no-messages">Be the first to send a message!</div>
+                :
+                    messages.map((message, i) => {
                     const convertedDate = convertToLocalTime(message['created_at']);
                     const date = convertedDate.toDateString();
                     const time = convertedDate.toLocaleTimeString('en-US');
