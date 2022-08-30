@@ -91,11 +91,13 @@ const HomePage = () => {
     useEffect(() => {
         retrieveChannels();
         retrieveUsers();
+    }, [loginHeaders]);
 
+    useEffect(() => {
         if(!selected && channels.length > 0) {
             updateSelected(channels[0]);
         }
-    }, [loginHeaders]);
+    }, [loginHeaders, channels]);
 
     return(
         <div className="homepage">
