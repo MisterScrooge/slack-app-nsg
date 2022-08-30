@@ -53,7 +53,7 @@ const AddChannel = ({addChannelWindowToggle, retrieveChannels}) => {
         <div className="popup-overlay-div">
             <div className="popup channel-details-popup">
                 <div className="popup-header">
-                    Create Channel
+                    Create Channel:
                     <i className="fa-solid fa-xmark" onClick={addChannelWindowToggle}></i>
                 </div>
                 <div className="popup-body">
