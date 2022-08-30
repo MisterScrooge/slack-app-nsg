@@ -102,3 +102,24 @@
 .failed-add {
     color: #F83839;
 }
+
+.member .fa-paper-plane {
+    border-radius: 50%;
+    width: 2.2rem;
+    height: 2.2rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: transparent;
+    margin-left: auto;
+}
+
+.member:hover .fa-paper-plane {
+    color: rgba(255, 255, 255, 0.7);
+}
+
+.member .fa-paper-plane:hover {
+    cursor: pointer;
+    color: white;
+    background: rgba(255, 255, 255, 0.1);
+}
