@@ -77,8 +77,8 @@ const MainChat = () => {
     }
 
     const convertToLocalTime = (serverTime) => {
-        const localTime = new Date(serverTime).toLocaleString("en-US", {timeZone: "Asia/Manila"});
-        return localTime.toString();
+        const localTime = new Date(new Date(serverTime).toLocaleString("en-US", {timeZone: "Asia/Manila"}));
+        return localTime;
     }
 
     useEffect(() => {
@@ -110,26 +110,35 @@ const MainChat = () => {
 
             <div className="messages-div">
                 {messages && messages.length > 0 && messages.map((message, i) => {
-                    const time = convertToLocalTime(message['created_at']);
-                    console.log(time);
+                    const convertedDate = convertToLocalTime(message['created_at']);
+                    const date = convertedDate.toDateString();
+                    const time = convertedDate.toLocaleTimeString('en-US');
                     const myMessage = message.sender.id === loginInfo.data.id;
+                    const newDate = i === 0 ? true : new Date(message['created_at']).toDateString() !== new Date(messages[i - 1]['created_at']).toDateString();
 
                     return (
-                        <div key={"message" + i} className={myMessage ? "message-div sent" : "message-div received"}>
-                            <div className="message-body">{message.body}</div>
-                            {myMessage ?
-                                <div className="message-details">
-                                    <div className="message-time">{time}</div>
-                                    <div className="message-sender">You</div>
-                                </div>
-                            :
-                                <div className="message-details">
-                                    <div className="initial">{message.sender.email[0].toUpperCase()}</div>
-                                    <div className="message-sender">{message.sender.email}</div>
-                                    <div className="message-time">{time}</div>
-                                </div>
-                            }
-                        </div>
+                        <>
+                            {newDate && <div className="date-div" key={`date${i}`}>
+                                <div className="line"></div>
+                                <p>{date}</p>
+                                <div className="line"></div>
+                            </div>}
+                            <div key={"message" + i} className={myMessage ? "message-div sent" : "message-div received"}>
+                                <div className="message-body">{message.body}</div>
+                                {myMessage ?
+                                    <div className="message-details">
+                                        <div className="message-time">{time}</div>
+                                        <div className="message-sender">You</div>
+                                    </div>
+                                :
+                                    <div className="message-details">
+                                        <div className="initial">{message.sender.email[0].toUpperCase()}</div>
+                                        <div className="message-sender">{message.sender.email}</div>
+                                        <div className="message-time">{time}</div>
+                                    </div>
+                                }
+                            </div>
+                        </>
                     )
                 })}
                 <div ref={bottomRef}/>
