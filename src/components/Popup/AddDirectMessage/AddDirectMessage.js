@@ -2,12 +2,14 @@ import { useState, useContext } from "react";
 import { SelectedContext } from "../../../contexts/SelectedContext";
 import { UsersContext } from "../../../contexts/UsersContext";
 import { UserDMsContext } from "../../../contexts/UserDMsContext";
+import { LoginInfo } from "../../../contexts/LoginContext";
 import "./AddDirectMessage.css"
 
 const AddDirectMessage = ({handleToggle}) => {
     const {users} = useContext(UsersContext);
     const {updateSelected} = useContext(SelectedContext);
     const {userDMs, updateUserDMs} = useContext(UserDMsContext);
+    const {loginInfo} = useContext(LoginInfo);
     const [email, setEmail] = useState("");
     const [message, setMessage] = useState("");
 
@@ -15,6 +17,11 @@ const AddDirectMessage = ({handleToggle}) => {
         e.preventDefault();
 
         if(email.trim().length === 0) {
+            return;
+        }
+
+        if(email.trim() === loginInfo['data']['email']) {
+            setMessage("You can't send a DM to yourself, silly! 😏");
             return;
         }
 
