@@ -4,7 +4,7 @@ import "./AddMembers.css"
 
 const AddMembers = ({tags, setTags, indexTags, setIndexTags}) => {
     const {users} = useContext(UsersContext);
-    const {searchItem, setSearchItem} =useState('');
+    const {searchItem, setSearchItem} = useState('');
 
     const handleKeyDown = (e) => {
         if (e.key !== "Enter") return;
@@ -57,7 +57,6 @@ const AddMembers = ({tags, setTags, indexTags, setIndexTags}) => {
                         </div>
                     )
                 })}
-                {/* {users} */}
             </div>
         </div>
     )
