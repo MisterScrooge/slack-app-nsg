@@ -6,6 +6,28 @@ const UserReg = () => {
     const [userInput, setUserInput] = useState({email: '', password: '', password_confirmation: ''});
     const navigate = useNavigate();
 
+    const registration = async (userInput) => {
+
+        const response = await fetch("http://206.189.91.54/api/v1/auth", {
+            method: "POST",
+            headers: {
+                'Content-type': 'application/json'
+            },
+            body: JSON.stringify(userInput)
+        });
+        
+        if(response.status === 200) {
+        navigate("/");
+        } else {
+            return;
+        }
+    };
+
+    const submitHandler = (e) => {
+        e.preventDefault();
+        registration(userInput)
+    };
+
     return (
         <div className="login-reg-con">
             <div className="form-con">
@@ -44,7 +66,12 @@ const UserReg = () => {
                     </div>
 
                     <div className="form-inner-con">
-                        <button type="Submit" className="form-btn">Sign up</button>
+                        <button 
+                            type="Submit" 
+                            className="form-btn"
+                            onClick={submitHandler}
+                            >Sign up
+                        </button>
                     </div>
                 </form>
 
