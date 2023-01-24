@@ -1,9 +1,11 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import validator from 'validator';
 import "./Login-Reg.css";
 
 const UserReg = () => {
     const [userInput, setUserInput] = useState({email: '', password: '', password_confirmation: ''});
+    const [message, setMessage] = useState("");
     const navigate = useNavigate();
 
     const registration = async (userInput) => {
@@ -15,17 +17,30 @@ const UserReg = () => {
             },
             body: JSON.stringify(userInput)
         });
-        
+
         if(response.status === 200) {
-        navigate("/");
+            navigate("/");
         } else {
-            return;
+            const data = await response.json();
+            const error = data.errors['full_messages'][0];
+            setMessage(error);
         }
     };
 
     const submitHandler = (e) => {
         e.preventDefault();
-        registration(userInput)
+
+        if(userInput.password !== userInput.password_confirmation) {
+            setMessage("Password confirmation did not match");
+            return;
+        }
+
+        if(!validator.isEmail(userInput.email)) {
+            setMessage("Email is not valid");
+            return;
+        }
+
+        registration(userInput);
     };
 
     return (
@@ -66,8 +81,12 @@ const UserReg = () => {
                     </div>
 
                     <div className="form-inner-con">
-                        <button 
-                            type="Submit" 
+                        <p className="invalid">{message}</p>
+                    </div>
+
+                    <div className="form-inner-con">
+                        <button
+                            type="Submit"
                             className="form-btn"
                             onClick={submitHandler}
                             >Sign up

@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { ChannelDetails, ChannelsContext } from "../../contexts/ChannelsContext";
 import { LoginHeaders, LoginInfo } from "../../contexts/LoginContext";
@@ -15,6 +15,7 @@ const MainChat = () => {
     const [send, setSend] = useState("");
     const [messages, setMessages] = useState([]);
     const [isToggled, setIsToggled] = useState(false);
+    const bottomRef = useRef(null);
     const navigate = useNavigate();
     const url = "http://206.189.91.54/api/v1/";
     let recClass = selected && channels.includes(selected) ? "Channel" : "User";
@@ -75,6 +76,11 @@ const MainChat = () => {
         }
     }
 
+    const convertToLocalTime = (serverTime) => {
+        const localTime = new Date(new Date(serverTime).toLocaleString("en-US", {timeZone: "Asia/Manila"}));
+        return localTime;
+    }
+
     useEffect(() => {
         recClass = channels.includes(selected) ? "Channel" : "User";
         setSend("");
@@ -88,6 +94,10 @@ const MainChat = () => {
         }
     }, [selected]);
 
+    useEffect(() => {
+        bottomRef.current?.scrollIntoView({behavior: 'smooth'});
+    }, [messages]);
+
     return(
         <div className="main">
             {selected && <>
@@ -99,28 +109,41 @@ const MainChat = () => {
             {isToggled && <ChannelDetailsPopup handleToggle={handleToggle} retrieveChannelDetails={retrieveChannelDetails}/>}
 
             <div className="messages-div">
-                {messages && messages.length > 0 && messages.map((message, i) => {
-                    const time = message['created_at'].slice(11, 16);
+                {(!messages || messages.length === 0) ? <div className="no-messages">Be the first to send a message!</div>
+                :
+                    messages.map((message, i) => {
+                    const convertedDate = convertToLocalTime(message['created_at']);
+                    const date = convertedDate.toDateString();
+                    const time = convertedDate.toLocaleTimeString('en-US');
                     const myMessage = message.sender.id === loginInfo.data.id;
+                    const newDate = i === 0 ? true : new Date(message['created_at']).toDateString() !== new Date(messages[i - 1]['created_at']).toDateString();
 
                     return (
-                        <div key={"message" + i} className={myMessage ? "message-div sent" : "message-div received"}>
-                            <div className="message-body">{message.body}</div>
-                            {myMessage ?
-                                <div className="message-details">
-                                    <div className="message-time">{time}</div>
-                                    <div className="message-sender">You</div>
-                                </div>
-                            :
-                                <div className="message-details">
-                                    <div className="initial">{message.sender.email[0].toUpperCase()}</div>
-                                    <div className="message-sender">{message.sender.email}</div>
-                                    <div className="message-time">{time}</div>
-                                </div>
-                            }
-                        </div>
+                        <>
+                            {newDate && <div className="date-div" key={`date${i}`}>
+                                <div className="line"></div>
+                                <p>{date}</p>
+                                <div className="line"></div>
+                            </div>}
+                            <div key={"message" + i} className={myMessage ? "message-div sent" : "message-div received"}>
+                                <div className="message-body">{message.body}</div>
+                                {myMessage ?
+                                    <div className="message-details">
+                                        <div className="message-time">{time}</div>
+                                        <div className="message-sender">You</div>
+                                    </div>
+                                :
+                                    <div className="message-details">
+                                        <div className="initial">{message.sender.email[0].toUpperCase()}</div>
+                                        <div className="message-sender">{message.sender.email}</div>
+                                        <div className="message-time">{time}</div>
+                                    </div>
+                                }
+                            </div>
+                        </>
                     )
                 })}
+                <div ref={bottomRef}/>
             </div>
 
             <form className="send-div" onSubmit={e => sendMessage(e, send)}>

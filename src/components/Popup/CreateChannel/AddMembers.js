@@ -4,6 +4,7 @@ import "./AddMembers.css"
 
 const AddMembers = ({tags, setTags, indexTags, setIndexTags}) => {
     const {users} = useContext(UsersContext);
+    const [searchItem, setSearchItem] = useState("");
 
     const handleKeyDown = (e) => {
         if (e.key !== "Enter") return;
@@ -22,8 +23,9 @@ const AddMembers = ({tags, setTags, indexTags, setIndexTags}) => {
         } else {
             alert('😨 Please enter existing user email!')
         }
-        e.target.value = '';
     }
+
+    const filteredUsers = users.filter(user => user.email.includes(searchItem));
 
     const removeTag = (index) => {
         setIndexTags(indexTags.filter((el, i) => i !== index));
@@ -31,15 +33,34 @@ const AddMembers = ({tags, setTags, indexTags, setIndexTags}) => {
     }
 
     return (
-        <div className="tags-input-container">
+        <div>
+            <div className="tags-input-container">
 
-            { tags.map((tag, index) => (
-                <div className="tag-item" key={index}>
-                    <span className="text">{tag}</span>
-                    <span className="close" onClick={() => removeTag(index)}>&times;</span>
-                </div>
-            )) }
-            <input onKeyDown={handleKeyDown} type="text" placeholder="...akobudoy@uwu.com" className="tags-input-box" />
+                { tags.map((tag, index) => (
+                    <div className="tag-item" key={index}>
+                        <span className="text">{tag}</span>
+                        <span className="close" onClick={() => removeTag(index)}>&times;</span>
+                    </div>
+                )) }
+                <input
+                    onKeyDown={handleKeyDown}
+                    value={searchItem}
+                    onInput={e => setSearchItem(e.target.value)}
+                    type="text"
+                    placeholder="...akobudoy@uwu.com"
+                    className="tags-input-box"
+                />
+            </div>
+            <div className="search-filter-container">
+                {filteredUsers.map((value) => {
+                    return (
+                        <div className="search-filter-item">
+                            {value.email}
+                        </div>
+                    )
+                })}
+                {/* {users} */}
+            </div>
         </div>
     )
 }

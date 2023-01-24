@@ -1,13 +1,15 @@
 .channel-name-container {
-    margin-bottom: 6px;
+    margin-bottom: 0.5rem;
 }
+
 .channel-name-input {
     margin-left: 10px;
-    padding: 5px;
-    background-color: #1a1924;
-    border: 1px solid;
+    padding: 0.4rem;
+    background-color: #37393e;
+    border: 2px solid #3f4151;
     border-radius: 3px;
     color: rgba(255, 255, 255, 0.8);
+    font-size: 1em;
 }
 
 .button-container {
